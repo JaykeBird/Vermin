@@ -17,11 +17,11 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-<<<<<<< Updated upstream
+<<<<<<< HEAD
 								GlobalSection(MonoDevelopProperties) = preSolution
 =======
 									GlobalSection(MonoDevelopProperties) = preSolution
->>>>>>> Stashed changes
+>>>>>>> d0ea40cef8bbc91c0e91570ec2f200e07896eca9
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
