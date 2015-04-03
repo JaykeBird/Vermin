@@ -7,6 +7,7 @@ using System.Collections;
 public class EnemyAI : MonoBehaviour 
 {
 	public float acceleration = 35f;					//acceleration of enemy movement
+	private float cAccel;
 	public float deceleration = 8f;						//deceleration of enemy movement
 	public float rotateSpeed = 0.7f;					//how fast enemy can rotate
 	public float speedLimit = 10f;						//how fast enemy can move
@@ -22,7 +23,10 @@ public class EnemyAI : MonoBehaviour
 	public GameObject attackBounds;						//trigger for attack bounds (player is hurt when they enter these bounds)
 	public Animator animatorController;					//object which holds the animator for this enem	
 	public MoveToPoints moveToPointsScript;				//if you've attached this script, drag the component here
-	
+	public GameObject glueTrapBound;
+
+	private float cSpeedLimit;
+	public TriggerParent glueTrapTrigger;				//A something.
 	public TriggerParent sightTrigger;
 	private TriggerParent attackTrigger;
 	private PlayerMove playerMove;
@@ -33,15 +37,22 @@ public class EnemyAI : MonoBehaviour
 	//setup
 	void Awake()
 	{		
+		cSpeedLimit = speedLimit;
+		cAccel = acceleration;
 		characterMotor = GetComponent<CharacterMotor>();
 		dealDamage = GetComponent<DealDamage>();
+	
 		//avoid setup errors
 		if(tag != "Enemy")
 		{
 			tag = "Enemy";
 			Debug.LogWarning("'EnemyAI' script attached to object without 'Enemy' tag, it has been assign automatically", transform);
 		}
-		
+		if (glueTrapBound) {
+			glueTrapTrigger = glueTrapBound.GetComponent<TriggerParent>();
+				if(!glueTrapTrigger)
+					Debug.LogError ("You stupid. You forget to add TriggerParent to Glue Trap Bound");
+				}
 		if(sightBounds)
 		{
 			sightTrigger = sightBounds.GetComponent<TriggerParent>();
@@ -63,6 +74,13 @@ public class EnemyAI : MonoBehaviour
 	
 	void Update()
 	{
+		if (glueTrapTrigger && glueTrapTrigger.colliding) {
+						speedLimit = 2f;
+			acceleration = 4f;
+				} else {
+			speedLimit = cSpeedLimit;
+			acceleration = cAccel;
+				}
 		//chase
 		if (sightTrigger && sightTrigger.colliding && chase)
 		{

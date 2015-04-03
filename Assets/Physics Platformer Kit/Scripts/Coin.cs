@@ -76,8 +76,10 @@ public class Coin : MonoBehaviour
 	{
 		if(collectSound)
 			AudioSource.PlayClipAtPoint(collectSound, transform.position);
-		if (gui)
+		if (gui) {
 			gui.coinsCollected ++;
+			//gui.
+		}	
 		Destroy(gameObject);
 	}
 }
