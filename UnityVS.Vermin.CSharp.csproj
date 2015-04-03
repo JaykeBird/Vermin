@@ -67,6 +67,7 @@
     <Compile Include="Assets\Physics Platformer Kit\Scripts\Goal.cs" />
     <Compile Include="Assets\Physics Platformer Kit\Scripts\Hazard.cs" />
     <Compile Include="Assets\Physics Platformer Kit\Scripts\Health.cs" />
+    <Compile Include="Assets\Physics Platformer Kit\Scripts\Item.cs" />
     <Compile Include="Assets\Physics Platformer Kit\Scripts\MoveToPoints.cs" />
     <Compile Include="Assets\Physics Platformer Kit\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\Physics Platformer Kit\Scripts\Stash.cs" />
