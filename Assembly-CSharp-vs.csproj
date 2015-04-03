@@ -59,12 +59,14 @@
      <Compile Include="Assets\Physics Platformer Kit\Scripts\Goal.cs" />
      <Compile Include="Assets\Physics Platformer Kit\Scripts\Hazard.cs" />
      <Compile Include="Assets\Physics Platformer Kit\Scripts\Health.cs" />
+     <Compile Include="Assets\Physics Platformer Kit\Scripts\Item.cs" />
      <Compile Include="Assets\Physics Platformer Kit\Scripts\MoveToPoints.cs" />
      <Compile Include="Assets\Physics Platformer Kit\Scripts\PlayerMove.cs" />
      <Compile Include="Assets\Physics Platformer Kit\Scripts\Stash.cs" />
      <Compile Include="Assets\Physics Platformer Kit\Scripts\Throwing.cs" />
      <Compile Include="Assets\Physics Platformer Kit\Scripts\TriggerParent.cs" />
      <Compile Include="Assets\Physics Platformer Kit\Scripts\Water.cs" />
+     <None Include="Assets\Physics Platformer Kit\Scripts\Items.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>

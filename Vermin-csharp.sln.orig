@@ -1,7 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{F14D717A-7E25-5CA8-0C54-1EED57BBA17B}") = "Vermin", "Assembly-CSharp.csproj", "{7BF1793F-3D12-32F0-6E5D-05DA472AB851}"
+Project("{F14D717A-7E25-5CA8-0C54-1EED57BBA17B}") = "Vermin", "Assembly-CSharp-vs.csproj", "{7BF1793F-3D12-32F0-6E5D-05DA472AB851}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,7 +17,11 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-								GlobalSection(MonoDevelopProperties) = preSolution
+<<<<<<< Updated upstream
+									GlobalSection(MonoDevelopProperties) = preSolution
+=======
+										GlobalSection(MonoDevelopProperties) = preSolution
+>>>>>>> Stashed changes
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

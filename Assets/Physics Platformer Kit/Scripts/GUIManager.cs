@@ -18,7 +18,7 @@ public class GUIManager : MonoBehaviour
 	void Start()
     {
         coinsInLevel = GameObject.FindGameObjectsWithTag("Coin").Length;
-        itemsInLevel = GameObject.FindGameObjectsWithTag("Item").Length;
+        //itemsInLevel = GameObject.FindGameObjectsWithTag("Item").Length;
 	}
 	
 	//show and how many coins you've collected

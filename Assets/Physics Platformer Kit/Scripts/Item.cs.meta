@@ -2,7 +2,9 @@ fileFormatVersion: 2
 guid: c26ccff68bdbeee4aac836d1b0c4166a
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - collectSound: {instanceID: 0}
+  - sprite: {fileID: 2800000, guid: c3f9fa3e2f7f9d24da6b408095ccfdb2, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
