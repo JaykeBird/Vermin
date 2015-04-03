@@ -26,6 +26,7 @@ public class EnemyAI : MonoBehaviour
 	public GameObject glueTrapBound;
 	public GameObject fanBound;
 	public TriggerParent fanTrigga;
+	public AudioClip fanSound;
 
 	private float cSpeedLimit;
 	public TriggerParent glueTrapTrigger;				//A something.
@@ -85,7 +86,8 @@ public class EnemyAI : MonoBehaviour
 	{
 		if (fanTrigga && fanTrigga.colliding) {
 			Debug.Log ("Fwooosh. The object is hit by a blast of unrealistcly strong gust of air from a desktop fan.");
-				}
+			AudioSource.PlayClipAtPoint(fanSound, transform.position);
+		}
 		if (glueTrapTrigger && glueTrapTrigger.colliding) {
 						speedLimit = 2f;
 			acceleration = 4f;

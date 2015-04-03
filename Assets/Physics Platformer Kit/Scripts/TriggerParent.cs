@@ -11,13 +11,16 @@ public class TriggerParent : MonoBehaviour
 	public bool collided, colliding;
 	[HideInInspector]
 	public GameObject hitObject;
+
 	
 	void Awake()
 	{
-		if(!collider || (collider && !collider.isTrigger))
+		if (!collider || (collider && !collider.isTrigger)) {
 			Debug.LogError ("'TriggerParent' script attached to object which does not have a trigger collider", transform);
+
+		}
 	}
-	
+
 	//see if anything entered trigger, filer by tag, store the object
 	void OnTriggerEnter (Collider other)
 	{

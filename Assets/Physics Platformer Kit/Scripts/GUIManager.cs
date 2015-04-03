@@ -35,6 +35,14 @@ public class GUIManager : MonoBehaviour
 
         if (itemsInLevel > 0)
         {
-        }
+			foreach (bool i in inventoryCheck)
+			{
+				if (i == true)
+				{
+					//GUILayout.Label(i);
+
+        		}
+			}
+		}
 	}
 }
