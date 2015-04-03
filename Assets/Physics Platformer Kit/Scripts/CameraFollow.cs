@@ -84,7 +84,7 @@ public class CameraFollow : MonoBehaviour
 		else
 		{
 			//keyboard camera rotation look
-			float axis = Input.GetAxis ("CamHorizontal") * inputRotationSpeed * Time.deltaTime;
+			float axis = Input.GetAxis ("CamHorizontal") * (-inputRotationSpeed) * Time.deltaTime;
 			followTarget.RotateAround (target.position, Vector3.up, axis);
 		}
 		
