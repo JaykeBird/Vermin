@@ -19,6 +19,9 @@ sysinfo.txt
 /*.user
 /*.unityproj
 /*.booproj
+
+# Other Items
+UnityVS.VersionSpecific.dll
  
 # ============ #
 # OS generated #
