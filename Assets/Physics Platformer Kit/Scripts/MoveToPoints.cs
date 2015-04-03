@@ -11,7 +11,7 @@ public class MoveToPoints : MonoBehaviour
 	public float delay;										//how long to wait at each waypoint
 	public type movementType;								//stop at final waypoint, loop through waypoints or move back n forth along waypoints
 	
-	public enum type { PlayOnce, Loop, PingPong }
+	public enum type { PlayOnce, Loop, PingPong, Secondary } //Added secondary movementType. It will go after the player if it sees it otherwise attack the stash
 	private int currentWp;
 	private float arrivalTime;
 	private bool forward = true, arrived = false;
@@ -123,6 +123,9 @@ public class MoveToPoints : MonoBehaviour
 				forward = true;
 			currentWp = (forward) ? currentWp += 1 : currentWp -= 1;
 		}
+		//if (movementType == type.Secondary) {
+
+		//}
 	}
 	
 	//draw gizmo spheres for waypoints

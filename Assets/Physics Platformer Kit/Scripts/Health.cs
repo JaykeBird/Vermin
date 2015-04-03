@@ -33,7 +33,7 @@ public class Health : MonoBehaviour
 	//setup
 	void Awake()
 	{
-		if(currentHealth <= 0)
+		if(currentHealth == 0)
 			Debug.LogWarning(transform.name + " has 'currentHealth' set to 0 or less in 'Health' script: it has died upon scene start");
 		audio.playOnAwake = false;
 		if(flashObject == null)
@@ -68,7 +68,7 @@ public class Health : MonoBehaviour
 		}
 		
 		//are we dead?
-		dead = (currentHealth <= 0) ? true : false;
+		dead = (currentHealth == 0) ? true : false;
 		if (dead)
 			Death();
 	}

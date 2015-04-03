@@ -23,7 +23,7 @@ public class EnemyAI : MonoBehaviour
 	public Animator animatorController;					//object which holds the animator for this enem	
 	public MoveToPoints moveToPointsScript;				//if you've attached this script, drag the component here
 	
-	private TriggerParent sightTrigger;
+	public TriggerParent sightTrigger;
 	private TriggerParent attackTrigger;
 	private PlayerMove playerMove;
 	private CharacterMotor characterMotor;
