@@ -162,7 +162,7 @@ public class PlayerMove : MonoBehaviour
 						rigidbody.AddForce (slide, ForceMode.Force);
 					}
 					//enemy bouncing
-					if (hit.transform.tag == "Enemy" && rigidbody.velocity.y < 0)
+					/*if (hit.transform.tag == "Enemy" && rigidbody.velocity.y < 0)
 					{
 						enemyAI = hit.transform.GetComponent<EnemyAI>();
 						enemyAI.BouncedOn();
@@ -170,7 +170,7 @@ public class PlayerMove : MonoBehaviour
 						dealDamage.Attack(hit.transform.gameObject, 1, 0f, 0f);
 					}
 					else
-						onEnemyBounce = 0;
+						onEnemyBounce = 0;*/  //Commented out to stop killing of enemy by jumping on it. We may modify this later...
 					//moving platforms
 					if (hit.transform.tag == "MovingPlatform" || hit.transform.tag == "Pushable")
 					{
