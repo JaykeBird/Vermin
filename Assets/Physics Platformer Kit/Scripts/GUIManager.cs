@@ -6,16 +6,15 @@ public class GUIManager : MonoBehaviour
 {	
 	public GUISkin guiSkin;					//assign the skin for GUI display
 	[HideInInspector]
-	public int coinsCollected;
+    public int coinsCollected=0;
+    public int coinsInStash1=0;
 
 	private int coinsInLevel;
-	private Health health;
 	
 	//setup, get how many coins are in this level
 	void Start()
-	{
-		coinsInLevel = GameObject.FindGameObjectsWithTag("Coin").Length;		
-		health = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+    {
+        coinsInLevel = GameObject.FindGameObjectsWithTag("Coin").Length;
 	}
 	
 	//show current health and how many coins you've collected
@@ -23,10 +22,11 @@ public class GUIManager : MonoBehaviour
 	{
 		GUI.skin = guiSkin;
 		GUILayout.Space(5f);
-		
-		if(health)
-			GUILayout.Label ("Health: " + health.currentHealth);
-		if(coinsInLevel > 0)
-			GUILayout.Label ("Cubes: " + coinsCollected + " / " + coinsInLevel);
+
+        if (coinsInLevel > 0)
+        {
+            GUILayout.Label("Coins: " + coinsCollected + " / " + coinsInLevel);
+            GUILayout.Label("Stash One: " + coinsInStash1);
+        }
 	}
 }
