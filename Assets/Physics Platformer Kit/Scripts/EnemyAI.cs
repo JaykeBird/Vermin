@@ -24,6 +24,8 @@ public class EnemyAI : MonoBehaviour
 	public Animator animatorController;					//object which holds the animator for this enem	
 	public MoveToPoints moveToPointsScript;				//if you've attached this script, drag the component here
 	public GameObject glueTrapBound;
+	public GameObject fanBound;
+	public TriggerParent fanTrigga;
 
 	private float cSpeedLimit;
 	public TriggerParent glueTrapTrigger;				//A something.
@@ -43,6 +45,13 @@ public class EnemyAI : MonoBehaviour
 		dealDamage = GetComponent<DealDamage>();
 	
 		//avoid setup errors
+		if (fanBound) {
+			fanTrigga = fanBound.GetComponent<TriggerParent>();
+			if(!fanTrigga)
+			{
+				Debug.LogError ("You stupid. You forget to add TriggerParent to Fan Bound");
+			}
+				}
 		if(tag != "Enemy")
 		{
 			tag = "Enemy";
@@ -74,6 +83,9 @@ public class EnemyAI : MonoBehaviour
 	
 	void Update()
 	{
+		if (fanTrigga && fanTrigga.colliding) {
+			Debug.Log ("Fwooosh. The object is hit by a blast of unrealistcly strong gust of air from a desktop fan.");
+				}
 		if (glueTrapTrigger && glueTrapTrigger.colliding) {
 						speedLimit = 2f;
 			acceleration = 4f;
