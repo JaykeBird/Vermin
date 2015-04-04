@@ -27,10 +27,13 @@ public class EnemyAI : MonoBehaviour
 	public GameObject fanBound;
 	public TriggerParent fanTrigga;
 	public AudioClip fanSound;
-	public GameObject theFan;							//yeah.
-	public GameObject vacuumBound;
-	private TriggerParent vacuumTrigger;
-	public GameObject theVacuum;
+    public GameObject theFan;							//yeah.
+    public GameObject vacuumBound;
+    private TriggerParent vacuumTrigger;
+    public GameObject theVacuum;
+    public GameObject stashBound;
+    private TriggerParent stashTrigger;
+    public GameObject theStash;
 
 	private float cSpeedLimit;
 	public TriggerParent glueTrapTrigger;				//A something.
@@ -53,11 +56,16 @@ public class EnemyAI : MonoBehaviour
 		cAccel = acceleration;
 		characterMotor = GetComponent<CharacterMotor>();
 		dealDamage = GetComponent<DealDamage>();
-	
-		//avoid setup errors
-		if (vacuumBound) {
-			vacuumTrigger = vacuumBound.GetComponent<TriggerParent>();
-				}
+
+        //avoid setup errors
+        if (vacuumBound)
+        {
+            vacuumTrigger = vacuumBound.GetComponent<TriggerParent>();
+        }
+        if (stashBound)
+        {
+            stashTrigger = stashBound.GetComponent<TriggerParent>();
+        }
 		if (fanBound) {
 			fanTrigga = fanBound.GetComponent<TriggerParent>();
 			if(!fanTrigga)
@@ -130,6 +138,13 @@ public class EnemyAI : MonoBehaviour
 			speedLimit = cSpeedLimit;
 			acceleration = cAccel;
 				}
+        if (stashTrigger && stashTrigger.colliding)
+        {
+            RaycastHit hit;
+            coins++;
+            theStash.
+        }
+        
 		//chase
 		if (sightTrigger && sightTrigger.colliding && chase)
 		{

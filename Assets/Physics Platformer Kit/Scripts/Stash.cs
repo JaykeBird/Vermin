@@ -48,7 +48,7 @@ public class Stash : MonoBehaviour
     {
         if (gui && gui.coinsInStash1!=0)
         {
-
+            gui.coinsInStash1--;
         }
     }
 }

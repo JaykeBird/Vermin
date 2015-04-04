@@ -17,3 +17,4 @@ There are multiple traps laid out throughout the map
 	Glue Spill (brown square on floor near stash) - slows enemy movement significantly when laid out by player
 		(player creation not yet implemented)
 
+There is also multiple items on the field that will appear on the user's GUI when picked up
