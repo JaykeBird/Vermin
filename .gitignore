@@ -38,3 +38,5 @@ ehthumbs.db
 UnityVS.Vermin.sln
 UnityVS.Vermin.sln
 UnityVS.Vermin.CSharp.csproj
+*.exe
+*.dll
