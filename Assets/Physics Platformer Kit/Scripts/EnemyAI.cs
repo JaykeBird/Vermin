@@ -26,7 +26,6 @@ public class EnemyAI : MonoBehaviour
 	public GameObject glueTrapBound;
 	public GameObject fanBound;
 	public TriggerParent fanTrigga;
-	public AudioClip fanSound;
     public GameObject theFan;							//yeah.
     public GameObject vacuumBound;
     private TriggerParent vacuumTrigger;
@@ -106,7 +105,6 @@ public class EnemyAI : MonoBehaviour
 	{
 		if(vacuumTrigger && vacuumTrigger.colliding)
 		{
-			AudioSource.PlayClipAtPoint (fanSound, transform.position);
 			Vector3 a = theVacuum.transform.position;
 			Vector3 b = transform.position;
 			Vector3 c = new Vector3();
@@ -118,10 +116,6 @@ public class EnemyAI : MonoBehaviour
 		}
 		if (fanTrigga && fanTrigga.colliding) {
 			//Debug.Log ("Fwooosh. The object is hit by a blast of unrealistcly strong gust of air from a desktop fan.");
-            if (fanSound)
-            {
-                AudioSource.PlayClipAtPoint(fanSound, transform.position);
-            }
 			Vector3 f =theFan.transform.position;
 			Vector3 e = transform.position;
 			Vector3 i = new Vector3();
@@ -143,9 +137,8 @@ public class EnemyAI : MonoBehaviour
 				}
         if (stashTrigger && stashTrigger.colliding)
         {
-            RaycastHit hit;
             coins++;
-            //theStash.
+            theStash.GetComponent<Stash>().coinWithdraw();
         }
         
 		//chase
