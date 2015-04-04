@@ -16,8 +16,15 @@ public class ItemObject
     private string name;
     private int quantity;
 
-    public ItemObject(Texture2D sprite)
+    public ItemObject()
     {
+
+    }
+
+    public ItemObject(Texture2D sprite, string name)
+    {
+        this.sprite = sprite;
+        this.name = name;
     }
 
     public Texture2D Sprite
@@ -41,6 +48,36 @@ public class ItemObject
         set
         {
             name = value;
+        }
+    }
+
+    public void AddItem()
+    {
+        quantity++;
+    }
+
+    public bool UseItem()
+    {
+        if (quantity > 0)
+        {
+            quantity--;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public int Count
+    {
+        get
+        {
+            return quantity;
+        }
+        set
+        {
+            quantity = value;
         }
     }
 }

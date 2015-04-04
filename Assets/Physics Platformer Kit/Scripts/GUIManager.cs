@@ -9,7 +9,7 @@ public class GUIManager : MonoBehaviour
 	[HideInInspector]
     public int coinsCollected=0;
     public int coinsInStash1=0;
-	public List<ItemObject> inventoryCheck = new List<ItemObject>(); //this will show which items the player currently has
+	public List<ItemObject> inventory = new List<ItemObject>(); //this will show which items the player currently has
 
 	private int coinsInLevel;
     private int itemsInLevel;
@@ -35,14 +35,48 @@ public class GUIManager : MonoBehaviour
 
         if (itemsInLevel > 0)
         {
-			foreach (ItemObject i in inventoryCheck)
+			foreach (ItemObject i in inventory)
 			{
-				if (i.Sprite != null)
+				if (i.Count > 0)
 				{
-					GUILayout.Label("Glue Bottle:");
-
+					GUILayout.Label(i.Name + ": " + i.Count.ToString());
         		}
 			}
 		}
 	}
+
+    public bool UseItem(string name)
+    {
+
+        foreach (ItemObject item in inventory)
+        {
+            if (item.Name == name)
+            {
+                return item.UseItem();
+            }
+        }
+
+        CleanInventory();
+
+        return false;
+    }
+
+    public void CleanInventory()
+    {
+        List<ItemObject> itemstoremove = new List<ItemObject>();
+
+        foreach (ItemObject item in inventory)
+        {
+            if (item.Count == 0)
+            {
+                itemstoremove.Add(item);
+            }
+        }
+
+        foreach (ItemObject item in itemstoremove)
+        {
+            inventory.Remove(item);   
+        }
+    }
+
 }

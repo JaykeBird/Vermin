@@ -87,7 +87,26 @@ public class Item : MonoBehaviour
             if (this.name.Equals("Glue Bottle"))   //Glue bottle is item number 0
             {
                 Item.inventory.Insert(0, this);
+            }
 
+            bool newitem = true; // not an item in our inventory
+
+            foreach (ItemObject item in gui.inventory)
+            {
+                if (item.Name == this.name)
+                {
+                    item.AddItem();
+                    newitem = false;
+                }
+            }
+
+            if (newitem)
+            {
+                ItemObject obj = new ItemObject();
+                obj.Name = this.name;
+                obj.Sprite = this.sprite;
+                obj.AddItem();
+                gui.inventory.Add(obj);
             }
         }
 
