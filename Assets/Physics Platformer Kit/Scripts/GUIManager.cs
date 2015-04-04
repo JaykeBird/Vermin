@@ -9,7 +9,7 @@ public class GUIManager : MonoBehaviour
 	[HideInInspector]
     public int coinsCollected=0;
     public int coinsInStash1=0;
-    public List<bool> inventoryCheck = new List<bool>(8);       //this will show which items the player currently has
+	public List<ItemObject> inventoryCheck = new List<ItemObject>(); //this will show which items the player currently has
 
 	private int coinsInLevel;
     private int itemsInLevel;
@@ -18,7 +18,7 @@ public class GUIManager : MonoBehaviour
 	void Start()
     {
         coinsInLevel = GameObject.FindGameObjectsWithTag("Coin").Length;
-        //itemsInLevel = GameObject.FindGameObjectsWithTag("Item").Length;
+        itemsInLevel = GameObject.FindGameObjectsWithTag("Item").Length;
 	}
 	
 	//show and how many coins you've collected
@@ -35,11 +35,11 @@ public class GUIManager : MonoBehaviour
 
         if (itemsInLevel > 0)
         {
-			foreach (bool i in inventoryCheck)
+			foreach (ItemObject i in inventoryCheck)
 			{
-				if (i == true)
+				if (i.Sprite != null)
 				{
-					//GUILayout.Label(i);
+					GUILayout.Label("Glue Bottle:");
 
         		}
 			}
