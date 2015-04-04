@@ -46,6 +46,8 @@ public class PlayerMove : MonoBehaviour
     private EnemyAI enemyAI;
     private GUIManager gui;
     private DealDamage dealDamage;
+
+    private int useItemCooldown = 0;
     
     //setup
     void Awake()
@@ -128,6 +130,11 @@ public class PlayerMove : MonoBehaviour
             animator.SetFloat("YVelocity", rigidbody.velocity.y);
         }
 
+        if (useItemCooldown > 0)
+        {
+            useItemCooldown--;
+        }
+
         // handle item usage
         List<float> fl = new List<float>();
         fl.Add(Input.GetAxisRaw("UseItem1"));
@@ -141,16 +148,20 @@ public class PlayerMove : MonoBehaviour
         fl.Add(Input.GetAxisRaw("UseItem9"));
         fl.Add(Input.GetAxisRaw("UseItem0"));
 
-        for (int i = 0; i < fl.Count; i++)
+        if (useItemCooldown == 0)
         {
-            if (fl[i] == 1)
+            for (int i = 0; i < fl.Count; i++)
             {
-                if (gui.inventory.Count > i)
+                if (fl[i] == 1)
                 {
-                    Debug.Log("Item " + (i).ToString() + " being used (" + gui.inventory[i].Name + ")");
-                    gui.UseItem((int) i);
+                    if (gui.inventory.Count > i)
+                    {
+                        Debug.Log("Item " + (i).ToString() + " being used (" + gui.inventory[i].Name + ")");
+                        gui.UseItem((int) i);
+                        useItemCooldown = 40;
+                    }
+                    //Debug.Log(i.ToString() + " is being pressed");
                 }
-                //Debug.Log(i.ToString() + " is being pressed");
             }
         }
         
