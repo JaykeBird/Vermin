@@ -27,9 +27,10 @@ public class EnemyAI : MonoBehaviour
 	public GameObject fanBound;
 	public TriggerParent fanTrigga;
 	public AudioClip fanSound;
-	public GameObject theEnviorment;					//please perserve it
 	public GameObject theFan;							//yeah.
-
+	public GameObject vacuumBound;
+	private TriggerParent vacuumTrigger;
+	public GameObject theVacuum;
 
 	private float cSpeedLimit;
 	public TriggerParent glueTrapTrigger;				//A something.
@@ -49,6 +50,9 @@ public class EnemyAI : MonoBehaviour
 		dealDamage = GetComponent<DealDamage>();
 	
 		//avoid setup errors
+		if (vacuumBound) {
+			vacuumTrigger = vacuumBound.GetComponent<TriggerParent>();
+				}
 		if (fanBound) {
 			fanTrigga = fanBound.GetComponent<TriggerParent>();
 			if(!fanTrigga)
@@ -87,8 +91,20 @@ public class EnemyAI : MonoBehaviour
 	
 	void Update()
 	{
+		if(vacuumTrigger && vacuumTrigger.colliding)
+		{
+			AudioSource.PlayClipAtPoint (fanSound, transform.position);
+			Vector3 a = theVacuum.transform.position;
+			Vector3 b = transform.position;
+			Vector3 c = new Vector3();
+			c.x = a.x - b.x;
+			c.y = a.y - b.y;
+			c.z = a.z - b.z;
+			c.Normalize ();
+			characterMotor.FanBlast (c,1000);
+		}
 		if (fanTrigga && fanTrigga.colliding) {
-			Debug.Log ("Fwooosh. The object is hit by a blast of unrealistcly strong gust of air from a desktop fan.");
+			//Debug.Log ("Fwooosh. The object is hit by a blast of unrealistcly strong gust of air from a desktop fan.");
 			AudioSource.PlayClipAtPoint(fanSound, transform.position);
 			Vector3 f =theFan.transform.position;
 			Vector3 e = transform.position;
