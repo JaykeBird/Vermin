@@ -21,7 +21,7 @@ public class GUIManager : MonoBehaviour
         itemsInLevel = GameObject.FindGameObjectsWithTag("Item").Length;
     }
     
-	//show how many coins you've collected
+    //show how many coins you've collected
     void OnGUI()
     {
         GUI.skin = guiSkin;
@@ -97,6 +97,11 @@ public class GUIManager : MonoBehaviour
         foreach (ItemObject item in itemstoremove)
         {
             inventory.Remove(item);   
+        }
+
+        foreach (ItemObject item in inventory)
+        {
+            Debug.Log("Item " + item.Name + " with " + item.Count.ToString() + " items");
         }
     }
 }
