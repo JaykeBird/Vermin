@@ -43,7 +43,7 @@ public class CharacterMotor : MonoBehaviour
 		DistanceToTarget = relativePos.magnitude;
 		if (DistanceToTarget <= stopDistance)
 			return true;
-		else
+		else 
 			rigidbody.AddForce(relativePos.normalized * acceleration * Time.deltaTime, ForceMode.VelocityChange);
 			return false;
 	}
@@ -95,8 +95,12 @@ public class CharacterMotor : MonoBehaviour
 				rigidbody.AddForce ((currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
 		}
 	}
-	public void FanBlast()
+	public void FanBlast(Vector3 direction, float magnitude)
 	{
+		direction.x = magnitude * direction.x;
+		direction.y = magnitude * direction.y;
+		direction.z = magnitude * direction.z;
+		rigidbody.AddForce (direction);
 
 	}
 }
