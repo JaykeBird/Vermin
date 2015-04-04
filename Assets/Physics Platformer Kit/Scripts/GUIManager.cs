@@ -39,7 +39,12 @@ public class GUIManager : MonoBehaviour
 			{
 				if (i.Count > 0)
 				{
-					GUILayout.Label(i.Name + ": " + i.Count.ToString());
+                    //GUILayoutOption opt = null;
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Label(i.Texture);
+                    GUILayout.Label(i.Count.ToString());
+                    GUILayout.EndHorizontal();
+					//GUILayout.Label(i.Name + ": " + i.Count.ToString());
         		}
 			}
 		}

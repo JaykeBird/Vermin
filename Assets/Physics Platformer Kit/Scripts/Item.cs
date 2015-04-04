@@ -104,7 +104,7 @@ public class Item : MonoBehaviour
             {
                 ItemObject obj = new ItemObject();
                 obj.Name = this.name;
-                obj.Sprite = this.sprite;
+                obj.Texture = this.sprite;
                 obj.AddItem();
                 gui.inventory.Add(obj);
             }
