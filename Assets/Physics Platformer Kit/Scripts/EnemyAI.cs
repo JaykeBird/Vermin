@@ -39,11 +39,15 @@ public class EnemyAI : MonoBehaviour
 	private PlayerMove playerMove;
 	private CharacterMotor characterMotor;
 	private DealDamage dealDamage;
-	
+    private GUIManager gui;
+    private int coins = 0;
 	
 	//setup
 	void Awake()
 	{		
+        // Instantiates the GUIManager.
+        gui = FindObjectOfType(typeof(GUIManager)) as GUIManager;
+
 		cSpeedLimit = speedLimit;
 		cAccel = acceleration;
 		characterMotor = GetComponent<CharacterMotor>();
@@ -149,6 +153,15 @@ public class EnemyAI : MonoBehaviour
 		//attack
 		if (attackTrigger && attackTrigger.collided)
 		{
+            //Debug.Log("Attack the player?");
+
+            if (gui.coinsCollected > 0)
+            {
+                gui.coinsCollected--;
+                coins++;
+                Debug.Log(coins.ToString());
+            }
+
 			dealDamage.Attack(attackTrigger.hitObject, attackDmg, pushHeight, pushForce);
 			//notify animator controller
 			if(animatorController)

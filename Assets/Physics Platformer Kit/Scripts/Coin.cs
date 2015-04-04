@@ -18,7 +18,7 @@ public class Coin : MonoBehaviour
 	//setup
 	void Awake()
 	{
-		gui = FindObjectOfType(typeof(GUIManager)) as GUIManager ;
+		gui = FindObjectOfType(typeof(GUIManager)) as GUIManager;
 		if(tag != "Coin")
 		{
 			tag = "Coin";
