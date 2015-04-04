@@ -10,9 +10,9 @@ One of four player classes can be chosen (changed in player class for now, selec
 	Magpie - able to fly and activate certain traps that others cannot
 
 There are multiple traps laid out throughout the map
-	Electric Fan (brown cylinder behind stash) - pushes enemies away for a duration after player activates it
+	Electric Fan yellow capsule behind stash) - pushes enemies away for a duration after player activates it
 		(timer not yet implemented)
-	Vaccuum Cleaner (brown cylinder on side opposite stash) - pulls enemies in for a duration after activated
+	Vaccuum Cleaner yellow capsule on side opposite stash) - pulls enemies in for a duration after activated
 		(timer not yet implemented)
 	Glue Spill (brown square on floor near stash) - slows enemy movement significantly when laid out by player
 		(player creation not yet implemented)

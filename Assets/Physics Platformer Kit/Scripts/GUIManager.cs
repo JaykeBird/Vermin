@@ -21,7 +21,7 @@ public class GUIManager : MonoBehaviour
         itemsInLevel = GameObject.FindGameObjectsWithTag("Item").Length;
 	}
 	
-	//show and how many coins you've collected
+	//show how many coins you've collected
 	void OnGUI()
 	{
 		GUI.skin = guiSkin;

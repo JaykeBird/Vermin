@@ -40,14 +40,14 @@ public class Stash : MonoBehaviour
             {
                 AudioSource.PlayClipAtPoint(depositSound, transform.position);
             }
-            gui.coinsCollected = 0;
         }
         gui.coinsInStash1 += gui.coinsCollected;
+        gui.coinsCollected = 0;
     }
 
-    void coinWithdraw()
+    public void coinWithdraw()
     {
-        if (gui && gui.coinsInStash1!=0)
+        if (gui && gui.coinsInStash1>=0)
         {
             gui.coinsInStash1--;
         }
