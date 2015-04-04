@@ -40,7 +40,8 @@ public class EnemyAI : MonoBehaviour
 	private CharacterMotor characterMotor;
 	private DealDamage dealDamage;
     private GUIManager gui;
-    private int coins = 0;
+    [HideInInspector]
+    public int coins = 0;
 	
 	//setup
 	void Awake()
@@ -120,7 +121,7 @@ public class EnemyAI : MonoBehaviour
 			i.x = -i.x;
 			i.y = 0;
 			i.x = -i.z;
-			characterMotor.FanBlast (i,10000);
+			characterMotor.FanBlast (i,1000);
 		}
 		if (glueTrapTrigger && glueTrapTrigger.colliding) {
 						speedLimit = 2f;
