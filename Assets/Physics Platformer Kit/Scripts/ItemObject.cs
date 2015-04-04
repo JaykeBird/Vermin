@@ -27,7 +27,7 @@ public class ItemObject
         this.name = name;
     }
 
-    public Texture2D Sprite
+    public Texture2D Texture
     {
         get
         {

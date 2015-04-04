@@ -33,3 +33,8 @@ UnityVS.VersionSpecific.dll
 Icon?
 ehthumbs.db
 [Tt]humbs.db
+*.sln
+*.csproj
+UnityVS.Vermin.sln
+UnityVS.Vermin.sln
+UnityVS.Vermin.CSharp.csproj

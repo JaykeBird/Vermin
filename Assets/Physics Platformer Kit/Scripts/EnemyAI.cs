@@ -27,10 +27,13 @@ public class EnemyAI : MonoBehaviour
 	public GameObject fanBound;
 	public TriggerParent fanTrigga;
 	public AudioClip fanSound;
-	public GameObject theFan;							//yeah.
-	public GameObject vacuumBound;
-	private TriggerParent vacuumTrigger;
-	public GameObject theVacuum;
+    public GameObject theFan;							//yeah.
+    public GameObject vacuumBound;
+    private TriggerParent vacuumTrigger;
+    public GameObject theVacuum;
+    public GameObject stashBound;
+    private TriggerParent stashTrigger;
+    public GameObject theStash;
 
 	private float cSpeedLimit;
 	public TriggerParent glueTrapTrigger;				//A something.
@@ -39,20 +42,30 @@ public class EnemyAI : MonoBehaviour
 	private PlayerMove playerMove;
 	private CharacterMotor characterMotor;
 	private DealDamage dealDamage;
-	
+    private GUIManager gui;
+    [HideInInspector]
+    public int coins = 0;
 	
 	//setup
 	void Awake()
 	{		
+        // Instantiates the GUIManager.
+        gui = FindObjectOfType(typeof(GUIManager)) as GUIManager;
+
 		cSpeedLimit = speedLimit;
 		cAccel = acceleration;
 		characterMotor = GetComponent<CharacterMotor>();
 		dealDamage = GetComponent<DealDamage>();
-	
-		//avoid setup errors
-		if (vacuumBound) {
-			vacuumTrigger = vacuumBound.GetComponent<TriggerParent>();
-				}
+
+        //avoid setup errors
+        if (vacuumBound)
+        {
+            vacuumTrigger = vacuumBound.GetComponent<TriggerParent>();
+        }
+        if (stashBound)
+        {
+            stashTrigger = stashBound.GetComponent<TriggerParent>();
+        }
 		if (fanBound) {
 			fanTrigga = fanBound.GetComponent<TriggerParent>();
 			if(!fanTrigga)
@@ -116,7 +129,7 @@ public class EnemyAI : MonoBehaviour
 			i.x = -i.x;
 			i.y = 0;
 			i.x = -i.z;
-			characterMotor.FanBlast (i,10000);
+			characterMotor.FanBlast (i,1000);
 		}
 		if (glueTrapTrigger && glueTrapTrigger.colliding) {
 						speedLimit = 2f;
@@ -125,6 +138,13 @@ public class EnemyAI : MonoBehaviour
 			speedLimit = cSpeedLimit;
 			acceleration = cAccel;
 				}
+        if (stashTrigger && stashTrigger.colliding)
+        {
+            RaycastHit hit;
+            coins++;
+            theStash.
+        }
+        
 		//chase
 		if (sightTrigger && sightTrigger.colliding && chase)
 		{
@@ -149,6 +169,15 @@ public class EnemyAI : MonoBehaviour
 		//attack
 		if (attackTrigger && attackTrigger.collided)
 		{
+            //Debug.Log("Attack the player?");
+
+            if (gui.coinsCollected > 0)
+            {
+                gui.coinsCollected--;
+                coins++;
+                Debug.Log(coins.ToString());
+            }
+
 			dealDamage.Attack(attackTrigger.hitObject, attackDmg, pushHeight, pushForce);
 			//notify animator controller
 			if(animatorController)

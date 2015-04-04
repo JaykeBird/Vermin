@@ -25,6 +25,10 @@ public class Stash : MonoBehaviour
         {
             coinDeposit();
         }
+        if (other.tag == "Enemy")
+        {
+            coinWithdraw();
+        }
     }
 
     void coinDeposit()
@@ -35,8 +39,16 @@ public class Stash : MonoBehaviour
             {
                 AudioSource.PlayClipAtPoint(depositSound, transform.position);
             }
-            gui.coinsInStash1 += gui.coinsCollected;
             gui.coinsCollected = 0;
+        }
+        gui.coinsInStash1 += gui.coinsCollected;
+    }
+
+    void coinWithdraw()
+    {
+        if (gui && gui.coinsInStash1!=0)
+        {
+            gui.coinsInStash1--;
         }
     }
 }
