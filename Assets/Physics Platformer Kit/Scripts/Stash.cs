@@ -35,7 +35,7 @@ public class Stash : MonoBehaviour
     {
         if (gui)
         {
-			gui.coinsInStash1 += gui.coinsCollected;
+
             if (depositSound)
             {
                 AudioSource.PlayClipAtPoint(depositSound, transform.position);
