@@ -5,27 +5,27 @@ using System.Collections.Generic;
 //ATTACH TO MAIN CAMERA, shows your health and coins
 public class GUIManager : MonoBehaviour 
 {	
-	public GUISkin guiSkin;					//assign the skin for GUI display
-	[HideInInspector]
+    public GUISkin guiSkin;					//assign the skin for GUI display
+    [HideInInspector]
     public int coinsCollected=0;
     public int coinsInStash1=0;
-	public List<ItemObject> inventory = new List<ItemObject>(); //this will show which items the player currently has
+    public List<ItemObject> inventory = new List<ItemObject>(); //this will show which items the player currently has
 
-	private int coinsInLevel;
+    private int coinsInLevel;
     private int itemsInLevel;
-	
-	//setup, get how many coins are in this level
-	void Start()
+    
+    //setup, get how many coins are in this level
+    void Start()
     {
         coinsInLevel = GameObject.FindGameObjectsWithTag("Coin").Length;
         itemsInLevel = GameObject.FindGameObjectsWithTag("Item").Length;
-	}
-	
-	//show and how many coins you've collected
-	void OnGUI()
-	{
-		GUI.skin = guiSkin;
-		GUILayout.Space(5f);
+    }
+    
+    //show and how many coins you've collected
+    void OnGUI()
+    {
+        GUI.skin = guiSkin;
+        GUILayout.Space(5f);
 
         if (coinsInLevel > 0)
         {
@@ -35,20 +35,34 @@ public class GUIManager : MonoBehaviour
 
         if (itemsInLevel > 0)
         {
-			foreach (ItemObject i in inventory)
-			{
-				if (i.Count > 0)
-				{
+            foreach (ItemObject i in inventory)
+            {
+                if (i.Count > 0)
+                {
                     //GUILayoutOption opt = null;
                     GUILayout.BeginHorizontal();
                     GUILayout.Label(i.Texture);
                     GUILayout.Label(i.Count.ToString());
                     GUILayout.EndHorizontal();
-					//GUILayout.Label(i.Name + ": " + i.Count.ToString());
-        		}
-			}
-		}
-	}
+                    //GUILayout.Label(i.Name + ": " + i.Count.ToString());
+                }
+            }
+        }
+    }
+
+    public bool UseItem(int id)
+    {
+        if (inventory.Count > id)
+        {
+            bool r = inventory[id].UseItem();
+            CleanInventory();
+            return r;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public bool UseItem(string name)
     {
@@ -57,11 +71,11 @@ public class GUIManager : MonoBehaviour
         {
             if (item.Name == name)
             {
-                return item.UseItem();
+                bool r = item.UseItem();
+                CleanInventory();
+                return r;
             }
         }
-
-        CleanInventory();
 
         return false;
     }
@@ -78,10 +92,11 @@ public class GUIManager : MonoBehaviour
             }
         }
 
+        Debug.Log("Removing " + itemstoremove.Count.ToString() + " items");
+
         foreach (ItemObject item in itemstoremove)
         {
             inventory.Remove(item);   
         }
     }
-
 }

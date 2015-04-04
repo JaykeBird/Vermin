@@ -118,7 +118,10 @@ public class EnemyAI : MonoBehaviour
 		}
 		if (fanTrigga && fanTrigga.colliding) {
 			//Debug.Log ("Fwooosh. The object is hit by a blast of unrealistcly strong gust of air from a desktop fan.");
-			AudioSource.PlayClipAtPoint(fanSound, transform.position);
+            if (fanSound)
+            {
+                AudioSource.PlayClipAtPoint(fanSound, transform.position);
+            }
 			Vector3 f =theFan.transform.position;
 			Vector3 e = transform.position;
 			Vector3 i = new Vector3();
@@ -142,7 +145,7 @@ public class EnemyAI : MonoBehaviour
         {
             RaycastHit hit;
             coins++;
-            theStash.
+            //theStash.
         }
         
 		//chase
