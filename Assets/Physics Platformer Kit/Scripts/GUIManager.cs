@@ -13,6 +13,8 @@ public class GUIManager : MonoBehaviour
 
     private int coinsInLevel;
     private int itemsInLevel;
+
+    public bool pauseGame = false;
     
     //setup, get how many coins are in this level
     void Start()

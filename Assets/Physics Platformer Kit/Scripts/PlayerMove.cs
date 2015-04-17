@@ -87,81 +87,93 @@ public class PlayerMove : MonoBehaviour
     
     //get state of player, values and input
     void Update()
-    {	
-        //handle jumping
-        JumpCalculations ();
-        //adjust movement values if we're in the air or on the ground
-        curAccel = (grounded) ? accel : airAccel;
-        curDecel = (grounded) ? decel : airDecel;
-        curRotateSpeed = (grounded) ? rotateSpeed : airRotateSpeed;
-                
-        //get movement axis relative to camera
-        screenMovementSpace = Quaternion.Euler (0, mainCam.eulerAngles.y, 0);
-        screenMovementForward = screenMovementSpace * Vector3.forward;
-        screenMovementRight = screenMovementSpace * Vector3.right;
-        
-        //get movement input, set direction to move in
-        float h = Input.GetAxisRaw ("Horizontal");
-        float v = Input.GetAxisRaw ("Vertical");
-        
-        //only apply vertical input to movemement, if player is not sidescroller
-        if(!sidescroller)
-            direction = (screenMovementForward * v) + (screenMovementRight * h);
-        else
-            direction = Vector3.right * h;
-        moveDirection = transform.position + direction;
+    {
+        if (!gui.pauseGame)
+        {
+            //handle jumping
+            JumpCalculations();
+            //adjust movement values if we're in the air or on the ground
+            curAccel = (grounded) ? accel : airAccel;
+            curDecel = (grounded) ? decel : airDecel;
+            curRotateSpeed = (grounded) ? rotateSpeed : airRotateSpeed;
+
+            //get movement axis relative to camera
+            screenMovementSpace = Quaternion.Euler(0, mainCam.eulerAngles.y, 0);
+            screenMovementForward = screenMovementSpace * Vector3.forward;
+            screenMovementRight = screenMovementSpace * Vector3.right;
+
+            //get movement input, set direction to move in
+            float h = Input.GetAxisRaw("Horizontal");
+            float v = Input.GetAxisRaw("Vertical");
+
+            //only apply vertical input to movemement, if player is not sidescroller
+            if (!sidescroller)
+                direction = (screenMovementForward * v) + (screenMovementRight * h);
+            else
+                direction = Vector3.right * h;
+            moveDirection = transform.position + direction;
+        }
     }
     
     //apply correct player movement (fixedUpdate for physics calculations)
     void FixedUpdate() 
     {
-        //are we grounded
-        grounded = IsGrounded ();
-        //move, rotate, manage speed
-        characterMotor.MoveTo (moveDirection, curAccel, 0.7f, true);
-        if (rotateSpeed != 0 && direction.magnitude != 0)
-            characterMotor.RotateToDirection (moveDirection , curRotateSpeed * 5, true);
-        characterMotor.ManageSpeed (curDecel, maxSpeed + movingObjSpeed.magnitude, true);
-        //set animation values
-        if(animator)
+        if (!gui.pauseGame)
         {
-            animator.SetFloat("DistanceToTarget", characterMotor.DistanceToTarget);
-            animator.SetBool("Grounded", grounded);
-            animator.SetFloat("YVelocity", rigidbody.velocity.y);
-        }
-
-        if (useItemCooldown > 0)
-        {
-            useItemCooldown--;
-        }
-
-        // handle item usage
-        List<float> fl = new List<float>();
-        fl.Add(Input.GetAxisRaw("UseItem1"));
-        fl.Add(Input.GetAxisRaw("UseItem2"));
-        fl.Add(Input.GetAxisRaw("UseItem3"));
-        fl.Add(Input.GetAxisRaw("UseItem4"));
-        fl.Add(Input.GetAxisRaw("UseItem5"));
-        fl.Add(Input.GetAxisRaw("UseItem6"));
-        fl.Add(Input.GetAxisRaw("UseItem7"));
-        fl.Add(Input.GetAxisRaw("UseItem8"));
-        fl.Add(Input.GetAxisRaw("UseItem9"));
-        fl.Add(Input.GetAxisRaw("UseItem0"));
-
-        if (useItemCooldown == 0)
-        {
-            for (int i = 0; i < fl.Count; i++)
+            //are we grounded
+            grounded = IsGrounded();
+            //move, rotate, manage speed
+            characterMotor.MoveTo(moveDirection, curAccel, 0.7f, true);
+            if (rotateSpeed != 0 && direction.magnitude != 0)
+                characterMotor.RotateToDirection(moveDirection, curRotateSpeed * 5, true);
+            characterMotor.ManageSpeed(curDecel, maxSpeed + movingObjSpeed.magnitude, true);
+            //set animation values
+            if (animator)
             {
-                if (fl[i] == 1)
+                animator.SetFloat("DistanceToTarget", characterMotor.DistanceToTarget);
+                animator.SetBool("Grounded", grounded);
+                animator.SetFloat("YVelocity", rigidbody.velocity.y);
+            }
+
+            if (useItemCooldown > 0)
+            {
+                useItemCooldown--;
+            }
+
+            // handle item usage
+            List<float> fl = new List<float>();
+            fl.Add(Input.GetAxisRaw("UseItem1"));
+            fl.Add(Input.GetAxisRaw("UseItem2"));
+            fl.Add(Input.GetAxisRaw("UseItem3"));
+            fl.Add(Input.GetAxisRaw("UseItem4"));
+            fl.Add(Input.GetAxisRaw("UseItem5"));
+            fl.Add(Input.GetAxisRaw("UseItem6"));
+            fl.Add(Input.GetAxisRaw("UseItem7"));
+            fl.Add(Input.GetAxisRaw("UseItem8"));
+            fl.Add(Input.GetAxisRaw("UseItem9"));
+            fl.Add(Input.GetAxisRaw("UseItem0"));
+
+            if (useItemCooldown == 0)
+            {
+                for (int i = 0; i < fl.Count; i++)
                 {
-                    if (gui.inventory.Count > i)
+                    if (fl[i] == 1)
                     {
-                        Debug.Log("Item " + (i).ToString() + " being used (" + gui.inventory[i].Name + ")");
-                        gui.UseItem((int) i);
-                        useItemCooldown = 40;
+                        if (gui.inventory.Count > i)
+                        {
+                            Debug.Log("Item " + (i).ToString() + " being used (" + gui.inventory[i].Name + ")");
+                            gui.UseItem((int) i);
+                            useItemCooldown = 40;
+                        }
+                        //Debug.Log(i.ToString() + " is being pressed");
                     }
-                    //Debug.Log(i.ToString() + " is being pressed");
                 }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Debug.Log("Open pause menu");
+                gui.pauseGame = true;
             }
         }
         
