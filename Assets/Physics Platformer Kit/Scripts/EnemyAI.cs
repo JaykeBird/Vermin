@@ -23,19 +23,23 @@ public class EnemyAI : MonoBehaviour
 	public GameObject attackBounds;						//trigger for attack bounds (player is hurt when they enter these bounds)
 	public Animator animatorController;					//object which holds the animator for this enem	
 	public MoveToPoints moveToPointsScript;				//if you've attached this script, drag the component here
-	public GameObject glueTrapBound;
-	public GameObject fanBound;
-	public TriggerParent fanTrigga;
-    public GameObject theFan;							//yeah.
-    public GameObject vacuumBound;
-    private TriggerParent vacuumTrigger;
-    public GameObject theVacuum;
+
+	public GameObject trapBounds;
+	private TriggerParent trapTrigger;
+
+	//public GameObject glueTrapBound;
+	//public GameObject fanBound;
+	//public TriggerParent fanTrigga;
+    //public GameObject theFan;							//yeah.
+    //public GameObject vacuumBound;
+    //private TriggerParent vacuumTrigger;
+    //public GameObject theVacuum;
     public GameObject stashBound;
     private TriggerParent stashTrigger;
     public GameObject theStash;
 
 	private float cSpeedLimit;
-	public TriggerParent glueTrapTrigger;				//A something.
+	//public TriggerParent glueTrapTrigger;				//A something.
 	public TriggerParent sightTrigger;
 	private TriggerParent attackTrigger;
 	private PlayerMove playerMove;
@@ -57,31 +61,37 @@ public class EnemyAI : MonoBehaviour
 		dealDamage = GetComponent<DealDamage>();
 
         //avoid setup errors
-        if (vacuumBound)
+        /*if (vacuumBound)
         {
             vacuumTrigger = vacuumBound.GetComponent<TriggerParent>();
-        }
-        if (stashBound)
-        {
-            stashTrigger = stashBound.GetComponent<TriggerParent>();
-        }
-		if (fanBound) {
+        }*/
+		/*if (fanBound) {
 			fanTrigga = fanBound.GetComponent<TriggerParent>();
 			if(!fanTrigga)
 			{
 				Debug.LogError ("You stupid. You forget to add TriggerParent to Fan Bound");
 			}
-				}
+				}*/
+		/*if (glueTrapBound) {
+			glueTrapTrigger = glueTrapBound.GetComponent<TriggerParent>();
+				if(!glueTrapTrigger)
+					Debug.LogError ("You stupid. You forget to add TriggerParent to Glue Trap Bound");
+				}*/
+		if (trapBounds) 
+		{
+			trapTrigger = trapBounds.GetComponent<TriggerParent>();
+		}
+        if (stashBound)
+        {
+            stashTrigger = stashBound.GetComponent<TriggerParent>();
+        }
+
 		if(tag != "Enemy")
 		{
 			tag = "Enemy";
 			Debug.LogWarning("'EnemyAI' script attached to object without 'Enemy' tag, it has been assign automatically", transform);
 		}
-		if (glueTrapBound) {
-			glueTrapTrigger = glueTrapBound.GetComponent<TriggerParent>();
-				if(!glueTrapTrigger)
-					Debug.LogError ("You stupid. You forget to add TriggerParent to Glue Trap Bound");
-				}
+
 		if(sightBounds)
 		{
 			sightTrigger = sightBounds.GetComponent<TriggerParent>();
@@ -103,7 +113,42 @@ public class EnemyAI : MonoBehaviour
 	
 	void Update()
 	{
-		if(vacuumTrigger && vacuumTrigger.colliding)
+		if (trapTrigger && trapTrigger.colliding) 
+		{
+			if(trapTrigger.hitObject.tag == "Glue")
+			{
+				speedLimit = 2f;
+				acceleration = 4f;
+			}else if(trapTrigger.hitObject.tag == "Fan")
+			{
+				Vector3 f = trapTrigger.hitObject.transform.position;
+				Vector3 e = transform.position;
+				Vector3 i = new Vector3();
+				i.x = f.x - e.x;
+				i.y = f.y - e.y;
+				i.z = f.z - e.z;
+				i.Normalize();
+				i.x = -i.x;
+				i.y = 0;
+				i.x = -i.z;
+				characterMotor.FanBlast (i,1000);
+			}else if(trapTrigger.hitObject.tag == "Vacuum")
+			{
+				Vector3 a = trapTrigger.hitObject.transform.position;
+				Vector3 b = transform.position;
+				Vector3 c = new Vector3();
+				c.x = a.x - b.x;
+				c.y = a.y - b.y;
+				c.z = a.z - b.z;
+				c.Normalize ();
+				characterMotor.FanBlast (c,1000);
+			}else
+			{
+				speedLimit = cSpeedLimit;
+				acceleration = cAccel;
+			}
+		}
+		/*if(vacuumTrigger && vacuumTrigger.colliding)
 		{
 			Vector3 a = theVacuum.transform.position;
 			Vector3 b = transform.position;
@@ -134,7 +179,7 @@ public class EnemyAI : MonoBehaviour
 				} else {
 			speedLimit = cSpeedLimit;
 			acceleration = cAccel;
-				}
+				}*/
         if (stashTrigger && stashTrigger.colliding)
         {
             coins++;
