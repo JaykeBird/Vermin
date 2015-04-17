@@ -95,14 +95,7 @@ public class CharacterMotor : MonoBehaviour
 				rigidbody.AddForce ((currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
 		}
 	}
-	public void FanBlast(Vector3 direction, float magnitude)
-	{
-		direction.x = magnitude * direction.x;
-		direction.y = magnitude * direction.y;
-		direction.z = magnitude * direction.z;
-		rigidbody.AddForce (direction);
 
-	}
 }
 
 /* NOTE: ManageSpeed does a similar job to simply increasing the friction property of a rigidbodies "physics material"
