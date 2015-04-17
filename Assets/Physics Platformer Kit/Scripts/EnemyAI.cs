@@ -27,19 +27,12 @@ public class EnemyAI : MonoBehaviour
 	public GameObject trapBounds;
 	private TriggerParent trapTrigger;
 
-	//public GameObject glueTrapBound;
-	//public GameObject fanBound;
-	//public TriggerParent fanTrigga;
-    //public GameObject theFan;							//yeah.
-    //public GameObject vacuumBound;
-    //private TriggerParent vacuumTrigger;
-    //public GameObject theVacuum;
+
     public GameObject stashBound;
     private TriggerParent stashTrigger;
     public GameObject theStash;
 
 	private float cSpeedLimit;
-	//public TriggerParent glueTrapTrigger;				//A something.
 	public TriggerParent sightTrigger;
 	private TriggerParent attackTrigger;
 	private PlayerMove playerMove;
@@ -60,23 +53,7 @@ public class EnemyAI : MonoBehaviour
 		characterMotor = GetComponent<CharacterMotor>();
 		dealDamage = GetComponent<DealDamage>();
 
-        //avoid setup errors
-        /*if (vacuumBound)
-        {
-            vacuumTrigger = vacuumBound.GetComponent<TriggerParent>();
-        }*/
-		/*if (fanBound) {
-			fanTrigga = fanBound.GetComponent<TriggerParent>();
-			if(!fanTrigga)
-			{
-				Debug.LogError ("You stupid. You forget to add TriggerParent to Fan Bound");
-			}
-				}*/
-		/*if (glueTrapBound) {
-			glueTrapTrigger = glueTrapBound.GetComponent<TriggerParent>();
-				if(!glueTrapTrigger)
-					Debug.LogError ("You stupid. You forget to add TriggerParent to Glue Trap Bound");
-				}*/
+     
 		if (trapBounds) 
 		{
 			trapTrigger = trapBounds.GetComponent<TriggerParent>();
@@ -124,66 +101,25 @@ public class EnemyAI : MonoBehaviour
 				acceleration = 4f;
 			}
 			if (trapTrigger.hitObject.tag == "Fan") {
-				//Debug.Log("Fan Much Load");
 				Vector3 f = trapTrigger.hitObject.transform.position;
 				Vector3 e = transform.position;
-				Vector3 i = new Vector3 ();
-				i.x = f.x - e.x;
-				i.y = f.y - e.y;
-				i.z = f.z - e.z;
+				Vector3 i = e - f;
 				i.Normalize ();
-				i.x = -i.x;
-				i.y = 0;
-				i.x = -i.z;
-				characterMotor.FanBlast (i, 1000);
+				this.rigidbody.AddForce (i*20,ForceMode.VelocityChange);
 			}
 			if (trapTrigger.hitObject.tag == "Vacuum") {
-				//Debug.Log("Sounds suspiciously like a fan.");
 				Vector3 a = trapTrigger.hitObject.transform.position;
 				Vector3 b = transform.position;
-				Vector3 c = new Vector3 ();
-				c.x = a.x - b.x;
-				c.y = a.y - b.y;
-				c.z = a.z - b.z;
+				Vector3 c = a-b;
 				c.Normalize ();
-				characterMotor.FanBlast (c, 1000);
+				this.rigidbody.AddForce (c*20,ForceMode.VelocityChange);
+
 			}
 		} else {
 			speedLimit = cSpeedLimit;
 			acceleration = cAccel;
 		}
-		/*if(vacuumTrigger && vacuumTrigger.colliding)
-		{
-			Vector3 a = theVacuum.transform.position;
-			Vector3 b = transform.position;
-			Vector3 c = new Vector3();
-			c.x = a.x - b.x;
-			c.y = a.y - b.y;
-			c.z = a.z - b.z;
-			c.Normalize ();
-			characterMotor.FanBlast (c,1000);
-		}
-		if (fanTrigga && fanTrigga.colliding) {
-			//Debug.Log ("Fwooosh. The object is hit by a blast of unrealistcly strong gust of air from a desktop fan.");
-			Vector3 f =theFan.transform.position;
-			Vector3 e = transform.position;
-			Vector3 i = new Vector3();
-			i.x = f.x - e.x;
-			i.y = f.y - e.y;
-			i.z = f.z - e.z;
-			i.Normalize();
-			i.x = -i.x;
-			i.y = 0;
-			i.x = -i.z;
-			characterMotor.FanBlast (i,1000);
-		}
-		if (glueTrapTrigger && glueTrapTrigger.colliding) {
-						speedLimit = 2f;
-			acceleration = 4f;
-				} else {
-			speedLimit = cSpeedLimit;
-			acceleration = cAccel;
-				}*/
+
         if (stashTrigger && stashTrigger.colliding)
         {
             coins++;
