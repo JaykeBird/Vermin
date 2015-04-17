@@ -49,11 +49,11 @@ public class PlayerMove : MonoBehaviour
 
     private int useItemCooldown = 0;
 
-	//base copies of all traps.
-	public GameObject fan;
-	public GameObject glue;
-	public GameObject vacuum;
-	
+    //base copies of all traps.
+    public GameObject fan;
+    public GameObject glue;
+    public GameObject vacuum;
+    
     //setup
     void Awake()
     {
@@ -88,6 +88,12 @@ public class PlayerMove : MonoBehaviour
         floorCheckers = new Transform[floorChecks.childCount];
         for (int i=0; i < floorCheckers.Length; i++)
             floorCheckers[i] = floorChecks.GetChild(i);
+
+        Canvas[] canv = GameObject.FindObjectsOfType<Canvas>();
+        foreach (Canvas c in canv)
+        {
+            c.renderer.enabled = false;
+        }
     }
     
     //get state of player, values and input
@@ -167,30 +173,30 @@ public class PlayerMove : MonoBehaviour
                         if (gui.inventory.Count > i)
                         {
                             Debug.Log("Item " + (i).ToString() + " being used (" + gui.inventory[i].Name + ")");
-						string name = gui.inventory[i].Name;
+                        string name = gui.inventory[i].Name;
                             gui.UseItem((int) i);
                             useItemCooldown = 40;
-						//throw object on the groud
-						if(name == "Glue Bottle")
-						{
-							glue.SetActive (true);
-							Instantiate (glue,transform.position,Quaternion.identity);
-							glue.SetActive (false);
-						}
-						if(name == "Fan")
-						{
-							fan.SetActive (true);
-							Instantiate (fan,transform.position,Quaternion.identity);
-							fan.SetActive (false);
+                        //throw object on the groud
+                        if(name == "Glue Bottle")
+                        {
+                            glue.SetActive (true);
+                            Instantiate (glue,transform.position,Quaternion.identity);
+                            glue.SetActive (false);
+                        }
+                        if(name == "Fan")
+                        {
+                            fan.SetActive (true);
+                            Instantiate (fan,transform.position,Quaternion.identity);
+                            fan.SetActive (false);
 
-						}
-						if(name == "Vacuum")
-						{
-							vacuum.SetActive (true);
-							Instantiate (vacuum,transform.position,Quaternion.identity);
-							vacuum.SetActive (false);
+                        }
+                        if(name == "Vacuum")
+                        {
+                            vacuum.SetActive (true);
+                            Instantiate (vacuum,transform.position,Quaternion.identity);
+                            vacuum.SetActive (false);
 
-						}
+                        }
 
                         }
                         //Debug.Log(i.ToString() + " is being pressed");
@@ -201,7 +207,8 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Debug.Log("Open pause menu");
-                gui.pauseGame = true;
+                //gui.pauseGame = true;
+                Application.LoadLevel("MainMenu");
             }
         }
         

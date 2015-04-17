@@ -31,6 +31,7 @@ public class PauseMenuScript : MonoBehaviour {
     {
         gui.pauseGame = false;
         canvas = FindObjectOfType(typeof(Canvas)) as Canvas;
+        
     }
 
 }
