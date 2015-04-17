@@ -48,7 +48,12 @@ public class PlayerMove : MonoBehaviour
     private DealDamage dealDamage;
 
     private int useItemCooldown = 0;
-    
+
+	//base copies of all traps.
+	public GameObject fan;
+	public GameObject glue;
+	public GameObject vacuum;
+	
     //setup
     void Awake()
     {
@@ -157,8 +162,31 @@ public class PlayerMove : MonoBehaviour
                     if (gui.inventory.Count > i)
                     {
                         Debug.Log("Item " + (i).ToString() + " being used (" + gui.inventory[i].Name + ")");
-                        gui.UseItem((int) i);
+						string name = gui.inventory[i].Name;
+						gui.UseItem((int) i);
                         useItemCooldown = 40;
+						//throw object on the groud
+						if(name == "Glue Bottle")
+						{
+							glue.SetActive (true);
+							Instantiate (glue,transform.position,Quaternion.identity);
+							glue.SetActive (false);
+						}
+						if(name == "Fan")
+						{
+							fan.SetActive (true);
+							Instantiate (fan,transform.position,Quaternion.identity);
+							fan.SetActive (false);
+
+						}
+						if(name == "Vacuum")
+						{
+							vacuum.SetActive (true);
+							Instantiate (vacuum,transform.position,Quaternion.identity);
+							vacuum.SetActive (false);
+
+						}
+
                     }
                     //Debug.Log(i.ToString() + " is being pressed");
                 }
