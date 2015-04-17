@@ -80,6 +80,10 @@ public class EnemyAI : MonoBehaviour
 		if (trapBounds) 
 		{
 			trapTrigger = trapBounds.GetComponent<TriggerParent>();
+			if(!trapTrigger)
+			{
+				Debug.LogError("You forgot to add the TriggerParent script to the Trapbounds. It was not found");
+			}
 		}
         if (stashBound)
         {
@@ -113,40 +117,40 @@ public class EnemyAI : MonoBehaviour
 	
 	void Update()
 	{
-		if (trapTrigger && trapTrigger.colliding) 
-		{
-			if(trapTrigger.hitObject.tag == "Glue")
-			{
+		if (trapTrigger && trapTrigger.colliding) {
+			if (trapTrigger.hitObject.tag == "Glue") {
+				Debug.Log ("Sticky");
 				speedLimit = 2f;
 				acceleration = 4f;
-			}else if(trapTrigger.hitObject.tag == "Fan")
-			{
+			}
+			if (trapTrigger.hitObject.tag == "Fan") {
+				//Debug.Log("Fan Much Load");
 				Vector3 f = trapTrigger.hitObject.transform.position;
 				Vector3 e = transform.position;
-				Vector3 i = new Vector3();
+				Vector3 i = new Vector3 ();
 				i.x = f.x - e.x;
 				i.y = f.y - e.y;
 				i.z = f.z - e.z;
-				i.Normalize();
+				i.Normalize ();
 				i.x = -i.x;
 				i.y = 0;
 				i.x = -i.z;
-				characterMotor.FanBlast (i,1000);
-			}else if(trapTrigger.hitObject.tag == "Vacuum")
-			{
+				characterMotor.FanBlast (i, 1000);
+			}
+			if (trapTrigger.hitObject.tag == "Vacuum") {
+				//Debug.Log("Sounds suspiciously like a fan.");
 				Vector3 a = trapTrigger.hitObject.transform.position;
 				Vector3 b = transform.position;
-				Vector3 c = new Vector3();
+				Vector3 c = new Vector3 ();
 				c.x = a.x - b.x;
 				c.y = a.y - b.y;
 				c.z = a.z - b.z;
 				c.Normalize ();
-				characterMotor.FanBlast (c,1000);
-			}else
-			{
-				speedLimit = cSpeedLimit;
-				acceleration = cAccel;
+				characterMotor.FanBlast (c, 1000);
 			}
+		} else {
+			speedLimit = cSpeedLimit;
+			acceleration = cAccel;
 		}
 		/*if(vacuumTrigger && vacuumTrigger.colliding)
 		{
