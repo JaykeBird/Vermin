@@ -40,3 +40,4 @@ UnityVS.Vermin.sln
 UnityVS.Vermin.CSharp.csproj
 *.exe
 *.dll
+Vermin_Data/
