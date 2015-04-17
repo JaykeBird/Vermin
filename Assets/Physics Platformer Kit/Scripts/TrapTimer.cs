@@ -4,7 +4,7 @@ using System.Collections;
 public class TrapTimer : MonoBehaviour {
 
 	public float TrapTime; //the time this trap has to live on this world.
-	private float TimeHappened; //the time this trap has lived on this world. 
+	public float TimeHappened; //the time this trap has lived on this world. 
 	// Use this for initialization
 	void Start () {
 		
@@ -15,7 +15,7 @@ public class TrapTimer : MonoBehaviour {
 		TimeHappened = TimeHappened + Time.deltaTime;
 		if (TimeHappened >= TrapTime) 
 		{
-			Destroy (this);
+			Destroy (this.gameObject);
 		}
 	}
 }
