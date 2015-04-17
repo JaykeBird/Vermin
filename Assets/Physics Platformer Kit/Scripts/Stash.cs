@@ -47,7 +47,7 @@ public class Stash : MonoBehaviour
 
     public void coinWithdraw()
     {
-        if (gui && gui.coinsInStash1>=0)
+        if (gui && gui.coinsInStash1>0)
         {
             gui.coinsInStash1--;
         }
