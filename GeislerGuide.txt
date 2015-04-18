@@ -1,16 +1,15 @@
-The objective of the game is to collect the coins (pink), and take them back to the stash (yellow cylinder in corner)
+The objective of the game is to collect the coins (pink), and take them back to the stash (yellow cylinder in corner).
+
 The enemy's objective is to get to this stash and steal coins.
 	As a secondary objective, enemies will attack you and steal coins directly from you.
-	Knocking over enemies will cause them to drop any coins that they have stolen.
+	You can jump on enemies to get all the coins back.  
 
- 
+There are multiple traps you can use. Each lasts for about thirty seconds
+	The Fan pushes enemies away.
+	The Vacuum sucks enemies towards it trapping them there.
+	Glue can be placed and when the enemy walks through it they slow down immensely.
 
-There are multiple traps laid out throughout the map
-	Electric Fan yellow capsule behind stash) - pushes enemies away for a duration after player activates it
-		(timer not yet implemented)
-	Vaccuum Cleaner yellow capsule on side opposite stash) - pulls enemies in for a duration after activated
-		(timer not yet implemented)
-	Glue Spill (brown square on floor near stash) - slows enemy movement significantly when laid out by player
-		(player creation not yet implemented)
+There are multiple items on the field, of slightly different textures, as we don't have models implemented for them yet. When you pick them up, icons on the side of the GUI will appear. One signifying each of the types of traps. You use the 1 2 and 3 keys to use the items. The first one will use the item on the first slot shown as the top most icon on the GUI. The second will be the second from top, and the third will be the third from the top. It is dependent on what order you pick them up.
+Also if you use up all of one the rest of the items will move up in position. So if you use all of your one slot; the one slot will be filled with what was previously the second slot. The third slot will fill the second slot. 
 
-There is also multiple items on the field that will appear on the user's GUI when picked up
+Careful using the vacuum. You may find yourself being hit by the enemy flying at you. 
