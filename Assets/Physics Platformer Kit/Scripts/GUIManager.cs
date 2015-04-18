@@ -64,7 +64,7 @@ public class GUIManager : MonoBehaviour
 
     public int TotalNumberOfCoinsInStashes()
     {
-        int c=0;
+        int c;
 
         foreach (int i in stashcoins)
         {
