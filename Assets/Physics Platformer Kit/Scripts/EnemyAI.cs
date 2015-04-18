@@ -169,7 +169,7 @@ public class EnemyAI : MonoBehaviour
             {
                 //Debug.Log("Attack the player?");
 
-                if (gui.coinsCollected > 0)
+                if (gui.coinsCollected > 0 && attackTrigger.hitObject.transform.position.y <= transform.position.y+transform.localScale.y/2f)
                 {
                     gui.coinsCollected--;
                     coins++;
