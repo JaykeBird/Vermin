@@ -84,7 +84,7 @@ public class Item : MonoBehaviour
 
         if (gui && sprite)
         {
-            if (this.name.Equals("Glue Bottle"))   //Glue bottle is item number 0
+            if (this.name.Equals("Glue"))   //Glue bottle is item number 0
             {
                 Item.inventory.Insert(0, this);
             }
