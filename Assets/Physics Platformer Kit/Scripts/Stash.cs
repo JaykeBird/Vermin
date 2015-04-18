@@ -8,16 +8,18 @@ public class Stash : MonoBehaviour
 
     private GUIManager gui;
 
-	// Use this for initialization
-	void Start ()
+    public int stashId;
+
+    // Use this for initialization
+    void Start ()
     {
         gui = FindObjectOfType(typeof(GUIManager)) as GUIManager;
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+    
+    // Update is called once per frame
+    void Update ()
     {
-	}
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -40,17 +42,29 @@ public class Stash : MonoBehaviour
             {
                 AudioSource.PlayClipAtPoint(depositSound, transform.position);
             }
+
+            bool canputincoins = false;
+
+            while (canputincoins == false)
+            {
+
+            }
+            gui.DepositCoinsInStash(this.stashId, gui.coinsCollected);
+            //gui.coinsInStash1 += gui.coinsCollected;
+            gui.coinsCollected = 0;
         }
-        gui.coinsInStash1 += gui.coinsCollected;
-        gui.coinsCollected = 0;
+
+
     }
 
     public void coinWithdraw(Collider other)
     {
-        if (gui && gui.coinsInStash1>0)
+        if (gui)
         {
-			other.gameObject.GetComponent<EnemyAI>().coins++;
-            gui.coinsInStash1--;
+            if (gui.RemoveCoinsInStash(this.stashId, 1) == 1)
+            {
+                other.gameObject.GetComponent<EnemyAI>().coins++;
+            }
         }
     }
 }

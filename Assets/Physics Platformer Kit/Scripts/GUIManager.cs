@@ -9,6 +9,8 @@ public class GUIManager : MonoBehaviour
     [HideInInspector]
     public int coinsCollected=0;
     public int coinsInStash1=0;
+
+    public List<int> stashcoins = new List<int>();
     public List<ItemObject> inventory = new List<ItemObject>(); //this will show which items the player currently has
 
     private int coinsInLevel;
@@ -32,6 +34,14 @@ public class GUIManager : MonoBehaviour
         if (coinsInLevel > 0)
         {
             GUILayout.Label("Coins: " + coinsCollected + " / " + coinsInLevel);
+
+            int count = 0;
+
+            foreach (int i in stashcoins)
+            {
+                count++;
+                GUILayout.Label("Stash" + count + ": " + i);
+            }
             GUILayout.Label("Stash One: " + coinsInStash1);
         }
 
@@ -50,6 +60,68 @@ public class GUIManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public int TotalNumberOfCoinsInStashes()
+    {
+        int c;
+
+        foreach (int i in stashcoins)
+        {
+            c += i;
+        }
+
+        return c;
+    }
+
+    public void DepositCoinsInStash(int id, int coins)
+    {
+        bool good = false;
+
+        while (good == false)
+        {
+            if (stashcoins.Count > id)
+            {
+                stashcoins.Add(0);
+            }
+            else
+            {
+                good = true;
+            }
+        }
+
+        stashcoins[id] = stashcoins[id] + coins;
+    }
+
+    public int RemoveCoinsInStash(int id, int coins)
+    {
+        bool good = false;
+
+        while (good == false)
+        {
+            if (stashcoins.Count > id)
+            {
+                stashcoins.Add(0);
+            }
+            else
+            {
+                good = true;
+            }
+        }
+
+        if (stashcoins[id] < coins)
+        {
+            int rem = stashcoins[id];
+            stashcoins[id] = 0;
+            return rem;
+        }
+        else
+        {
+            stashcoins[id] = stashcoins[id] - coins;
+            return coins;
+        }
+
+        
     }
 
     public bool UseItem(int id)
