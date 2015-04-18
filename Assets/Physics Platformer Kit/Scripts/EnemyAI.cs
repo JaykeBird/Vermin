@@ -39,13 +39,15 @@ public class EnemyAI : MonoBehaviour
     private CharacterMotor characterMotor;
     private DealDamage dealDamage;
     private GUIManager gui;
+	public int coins;
     [HideInInspector]
-    public int coins = 0;
+
     
     //setup
     void Awake()
     {		
         // Instantiates the GUIManager.
+		coins = 0;
         gui = FindObjectOfType(typeof(GUIManager)) as GUIManager;
 
         cSpeedLimit = speedLimit;
@@ -116,6 +118,7 @@ public class EnemyAI : MonoBehaviour
                     Vector3 e = transform.position;
                     Vector3 i = e - f;
                     i.Normalize();
+					i.y = 0;
                     this.rigidbody.AddForce(i * 20, ForceMode.VelocityChange);
                 }
                 if (trapTrigger.hitObject.tag == "Vacuum")
@@ -136,8 +139,8 @@ public class EnemyAI : MonoBehaviour
 
             if (stashTrigger && stashTrigger.colliding)
             {
-                coins++;
-                theStash.GetComponent<Stash>().coinWithdraw();
+                //coins++;
+                //theStash.GetComponent<Stash>().coinWithdraw();
             }
 
             //chase
@@ -216,4 +219,5 @@ public class EnemyAI : MonoBehaviour
         else
             Debug.LogWarning("'Player' tagged object landed on enemy, but without playerMove script attached, is unable to bounce");
     }
+
 }
