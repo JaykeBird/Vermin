@@ -15,3 +15,6 @@ Also if you use up all of one the rest of the items will move up in position. So
 Careful using the vacuum. You may find yourself being hit by the enemy flying at you. 
 
 The second scene You have to collect 5 coins and put them in one stash. Then collect another five and put another five in the other stash. If both stashes don't have five coins each winning is impossible.
+wasd for movement qe for rotation space to jump. 1, 2, and 3 to use items.
+
+
