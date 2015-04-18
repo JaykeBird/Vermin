@@ -1,0 +1,145 @@
+fileFormatVersion: 2
+guid: 4254a387a26c3a34a910f20d3059ac99
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Drawing09
+    100004: Group108
+    100006: Group109
+    100008: Layer:12
+    100010: Object266
+    100012: Object267
+    100014: Object268
+    100016: Object269
+    100018: Object270
+    100020: Object271
+    100022: Object272
+    100024: Object273
+    100026: Object274
+    100028: Object275
+    100030: Object276
+    100032: Object277
+    100034: Object278
+    100036: VRayPhysi0
+    100038: VRayPhysic
+    400000: //RootNode
+    400002: Drawing09
+    400004: Group108
+    400006: Group109
+    400008: Layer:12
+    400010: Object266
+    400012: Object267
+    400014: Object268
+    400016: Object269
+    400018: Object270
+    400020: Object271
+    400022: Object272
+    400024: Object273
+    400026: Object274
+    400028: Object275
+    400030: Object276
+    400032: Object277
+    400034: Object278
+    400036: VRayPhysi0
+    400038: VRayPhysic
+    2300000: Drawing09
+    2300002: Layer:12
+    2300004: Object266
+    2300006: Object267
+    2300008: Object268
+    2300010: Object269
+    2300012: Object270
+    2300014: Object271
+    2300016: Object272
+    2300018: Object273
+    2300020: Object274
+    2300022: Object275
+    2300024: Object276
+    2300026: Object277
+    2300028: Object278
+    3300000: Drawing09
+    3300002: Layer:12
+    3300004: Object266
+    3300006: Object267
+    3300008: Object268
+    3300010: Object269
+    3300012: Object270
+    3300014: Object271
+    3300016: Object272
+    3300018: Object273
+    3300020: Object274
+    3300022: Object275
+    3300024: Object276
+    3300026: Object277
+    3300028: Object278
+    4300000: Layer:12
+    4300002: Object266
+    4300004: Object267
+    4300006: Drawing09
+    4300008: Object268
+    4300010: Object269
+    4300012: Object270
+    4300014: Object271
+    4300016: Object272
+    4300018: Object273
+    4300020: Object274
+    4300022: Object275
+    4300024: Object276
+    4300026: Object277
+    4300028: Object278
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .100000001
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
