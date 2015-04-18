@@ -13,3 +13,5 @@ There are multiple items on the field, of slightly different textures, as we don
 Also if you use up all of one the rest of the items will move up in position. So if you use all of your one slot; the one slot will be filled with what was previously the second slot. The third slot will fill the second slot. 
 
 Careful using the vacuum. You may find yourself being hit by the enemy flying at you. 
+
+The second scene You have to collect 5 coins and put them in one stash. Then collect another five and put another five in the other stash. If both stashes don't have five coins each winning is impossible.
