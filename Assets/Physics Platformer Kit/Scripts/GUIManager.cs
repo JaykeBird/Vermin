@@ -10,7 +10,7 @@ public class GUIManager : MonoBehaviour
     public int coinsCollected=0;
     public int coinsInStash1=0;
 
-    public List<int> stashcoins = new List<int>();
+    public List<Stash> stashes = new List<Stash>();
     public List<ItemObject> inventory = new List<ItemObject>(); //this will show which items the player currently has
 
     private int coinsInLevel;
@@ -37,12 +37,12 @@ public class GUIManager : MonoBehaviour
 
             int count = 0;
 
-            foreach (int i in stashcoins)
+			for(int i = 0; i<stashes.Count; i++)
             {
-                count++;
-                GUILayout.Label("Stash" + count + ": " + i);
+                //count++;
+                GUILayout.Label("Stash " + i + " : " + stashes[i].getStashNum ());
             }
-            GUILayout.Label("Stash One: " + coinsInStash1);
+            //GUILayout.Label("Stash One: " + coinsInStash1);
         }
 
         if (itemsInLevel > 0)
@@ -64,19 +64,20 @@ public class GUIManager : MonoBehaviour
 
     public int TotalNumberOfCoinsInStashes()
     {
-        int c;
+        /*int c;
 
-        foreach (int i in stashcoins)
+		for(int i = 0; i < stashes.Count; i++)
         {
-            c += i;
+			c += stashes[i].getStashNum;
         }
 
-        return c;
+        return c;*/
+		return 0;
     }
 
     public void DepositCoinsInStash(int id, int coins)
     {
-        bool good = false;
+       /* bool good = false;
 
         while (good == false)
         {
@@ -90,12 +91,13 @@ public class GUIManager : MonoBehaviour
             }
         }
 
-        stashcoins[id] = stashcoins[id] + coins;
+        stashcoins[id] = stashcoins[id] + coins;*/
+
     }
 
     public int RemoveCoinsInStash(int id, int coins)
     {
-        bool good = false;
+       /* bool good = false;
 
         while (good == false)
         {
@@ -119,7 +121,8 @@ public class GUIManager : MonoBehaviour
         {
             stashcoins[id] = stashcoins[id] - coins;
             return coins;
-        }
+        }*/
+		return 0;
 
         
     }
@@ -178,4 +181,12 @@ public class GUIManager : MonoBehaviour
             Debug.Log("Item " + item.Name + " with " + item.Count.ToString() + " items");
         }
     }
+	public void addStash(Stash s)
+	{
+		stashes.Add (s);
+	}
+	public void updateStashes()
+	{
+
+	}
 }
