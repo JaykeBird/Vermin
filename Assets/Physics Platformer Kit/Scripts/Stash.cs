@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Stash : MonoBehaviour
+public class Stash : MonoBehaviour //fuck you again tom
 {
 
     public AudioClip depositSound; //sound to play when coins are deposited

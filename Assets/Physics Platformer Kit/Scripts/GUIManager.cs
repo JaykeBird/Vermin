@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 //ATTACH TO MAIN CAMERA, shows your health and coins
-public class GUIManager : MonoBehaviour 
+public class GUIManager : MonoBehaviour  //Fuck you tom
 {	
     public GUISkin guiSkin;					//assign the skin for GUI display
     [HideInInspector]
