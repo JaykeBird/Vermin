@@ -104,7 +104,9 @@ public class Item : MonoBehaviour
             {
                 ItemObject obj = new ItemObject();
                 obj.Name = this.name;
-                obj.Texture = this.sprite;
+                //obj.Texture = this.sprite;
+                Texture2D tex = Resources.Load(this.gameObject.name + "-32") as Texture2D;
+                obj.Texture = tex;
                 obj.AddItem();
                 gui.inventory.Add(obj);
             }
