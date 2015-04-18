@@ -177,7 +177,7 @@ public class PlayerMove : MonoBehaviour
                             gui.UseItem((int) i);
                             useItemCooldown = 40;
                         //throw object on the groud
-                        if(name == "Glue Bottle")
+                        if(name == "Glue")
                         {
                             glue.SetActive (true);
                             Instantiate (glue,transform.position,Quaternion.identity);
