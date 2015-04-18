@@ -27,7 +27,7 @@ public class Stash : MonoBehaviour
         }
         if (other.tag == "Enemy")
         {
-            coinWithdraw();
+            coinWithdraw(other);
         }
     }
 
@@ -45,10 +45,11 @@ public class Stash : MonoBehaviour
         gui.coinsCollected = 0;
     }
 
-    public void coinWithdraw()
+    public void coinWithdraw(Collider other)
     {
         if (gui && gui.coinsInStash1>0)
         {
+			other.gameObject.GetComponent<EnemyAI>().coins++;
             gui.coinsInStash1--;
         }
     }
