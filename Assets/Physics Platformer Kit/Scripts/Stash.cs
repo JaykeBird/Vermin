@@ -7,14 +7,14 @@ public class Stash : MonoBehaviour //fuck you again tom
     public AudioClip depositSound; //sound to play when coins are deposited
 
     private GUIManager gui;
-	private int stashNum;
+    private int stashNum;
     public int stashId;
 
     // Use this for initialization
     void Start ()
     {
         gui = FindObjectOfType(typeof(GUIManager)) as GUIManager;
-		gui.addStash (this);
+        gui.addStash (this);
     }
     
     // Update is called once per frame
@@ -52,9 +52,9 @@ public class Stash : MonoBehaviour //fuck you again tom
            // }
             //gui.DepositCoinsInStash(this.stashId, gui.coinsCollected);
             //gui.coinsInStash1 += gui.coinsCollected;
-			stashNum += gui.coinsCollected;
-			gui.coinsCollected = 0;
-			gui.updateStashes();
+            stashNum += gui.coinsCollected;
+            gui.coinsCollected = 0;
+            gui.updateStashes();
         }
 
 
@@ -69,13 +69,13 @@ public class Stash : MonoBehaviour //fuck you again tom
                 other.gameObject.GetComponent<EnemyAI>().coins++;
             }
         }*/
-		if (stashNum > 0) {
-			other.GetComponent<EnemyAI> ().coins++;
-			stashNum--;
-		}
+        if (stashNum > 0) {
+            other.GetComponent<EnemyAI> ().coins++;
+            stashNum--;
+        }
     }
-	public int getStashNum()
-	{
-		return stashNum;
-	}
+    public int getStashNum()
+    {
+        return stashNum;
+    }
 }
