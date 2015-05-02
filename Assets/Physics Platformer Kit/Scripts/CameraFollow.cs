@@ -125,7 +125,6 @@ public class CameraFollow : MonoBehaviour
 
 			if(Physics.Raycast (transform.position, heading/heading.magnitude, out hitinfo, heading.magnitude))
 			{
-				Debug.Log ("Something was hit by the Raycast");
 				if(hitinfo.transform != target)
 				{
 					if(Vector3.Distance (transform.position, hitinfo.transform.position) < Vector3.Distance (transform.position,target.position))
