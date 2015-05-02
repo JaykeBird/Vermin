@@ -384,7 +384,8 @@ public class PlayerMove : MonoBehaviour
     {
         playerClass = CharacterClassData.getClass();
         Debug.Log(maxSpeed.ToString());
-        maxSpeed = maxSpeed * (float)(CharacterClassData.getClassSpeed(playerClass));
+        accel = accel * (float)(CharacterClassData.getClassSpeed(playerClass));
+		decel = decel * (float)(1 / CharacterClassData.getClassSpeed (playerClass));
         Debug.Log(maxSpeed.ToString() + "< NEW ONE");
         jumpForce = jumpForce * (float)(CharacterClassData.getClassJump(playerClass));
         secondJumpForce = secondJumpForce * (float)(CharacterClassData.getClassJump(playerClass));
