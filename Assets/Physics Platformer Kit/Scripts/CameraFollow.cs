@@ -15,8 +15,8 @@ public class CameraFollow : MonoBehaviour
 	public GameObject waterFilter;								//object to render in front of camera when it is underwater
 	public string[] avoidClippingTags;							//tags for big objects in your game, which you want to camera to try and avoid clipping with										//the Trigger Parent.
 
-	private MeshRenderer h;
-	private List<MeshRenderer> hits;
+	//private MeshRenderer h;
+	private List<MeshRenderer> hits = new List<MeshRenderer>();
 	private Transform followTarget;
 	private bool camColliding;
 	
@@ -129,21 +129,28 @@ public class CameraFollow : MonoBehaviour
 				if(hitinfo.transform != target)
 				{
 
-					h =  hitinfo.transform.GetComponentInParent<MeshRenderer>();
+					MeshRenderer h =  hitinfo.transform.GetComponentInParent<MeshRenderer>();
 					h.enabled = false;
+					hits.Add (h);
 
 
-
-					if(h.GetComponentInParent<Transform>() != hitinfo.transform)
+					for(int i = 0 ; i<hits.Count;i++)
 					{
-						Debug.Log ("Enabled!");
-						h.enabled = true;
-						h = null;
+						if(hits[i].GetComponentInParent<Transform>() != hitinfo.transform)
+						{
+							hits[i].enabled = true;
+							hits.RemoveAt (i);
+						}
 					}
+
+
+
 				}else{
-					if(h)
+					hitinfo = new RaycastHit();
+					for(int i = 0 ; i<hits.Count;i++)
 					{
-						h.enabled = true;
+						hits[i].enabled = true;
+						hits.RemoveAt (i);
 					}
 				}
 					
