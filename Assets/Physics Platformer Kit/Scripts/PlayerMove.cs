@@ -309,7 +309,7 @@ public class PlayerMove : MonoBehaviour
             airPressTime = Time.time;
         
         //if were on ground within slope limit
-        if (grounded && slope < slopeLimit)
+        if (grounded && slope < slopeLimit || playerClass==CharacterClassData.characterClass.BIRD)
         {
             //and we press jump, or we pressed jump justt before hitting the ground
             if (Input.GetButtonDown ("Jump") || airPressTime + jumpLeniancy > Time.time)
