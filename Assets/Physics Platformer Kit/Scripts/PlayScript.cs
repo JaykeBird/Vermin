@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Physics_Platformer_Kit.Scripts;
 
 public class PlayScript : MonoBehaviour {
 
@@ -26,5 +27,11 @@ public class PlayScript : MonoBehaviour {
         Debug.Log("Let's exit!");
 
         Application.Quit();
+        
+    }
+
+    public void ChangeClass(CharacterClassData.characterClass value)
+    {
+        CharacterClassData.setClass(value);
     }
 }
