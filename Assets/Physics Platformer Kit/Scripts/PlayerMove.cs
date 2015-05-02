@@ -396,13 +396,28 @@ public class PlayerMove : MonoBehaviour
         switch (ctype)
         {
             case CharacterClassData.characterClass.SQUIRREL:
-                
+                transform.Find("squirrel").gameObject.SetActive(true);
+                transform.Find("catsnake").gameObject.SetActive(false);
+                transform.Find("raccoon").gameObject.SetActive(false);
+                transform.Find("magpie").gameObject.SetActive(false);
                 break;
             case CharacterClassData.characterClass.RACCOON:
+                transform.Find("squirrel").gameObject.SetActive(false);
+                transform.Find("catsnake").gameObject.SetActive(false);
+                transform.Find("raccoon").gameObject.SetActive(true);
+                transform.Find("magpie").gameObject.SetActive(false);
                 break;
             case CharacterClassData.characterClass.FERRET:
+                transform.Find("squirrel").gameObject.SetActive(false);
+                transform.Find("catsnake").gameObject.SetActive(true);
+                transform.Find("raccoon").gameObject.SetActive(false);
+                transform.Find("magpie").gameObject.SetActive(false);
                 break;
             case CharacterClassData.characterClass.BIRD:
+                transform.Find("squirrel").gameObject.SetActive(false);
+                transform.Find("catsnake").gameObject.SetActive(false);
+                transform.Find("raccoon").gameObject.SetActive(false);
+                transform.Find("magpie").gameObject.SetActive(true);
                 break;
             default:
                 break;
