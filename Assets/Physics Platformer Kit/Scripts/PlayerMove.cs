@@ -383,10 +383,10 @@ public class PlayerMove : MonoBehaviour
     public void applyPlayerClass() //amplifies the jump height and movement speed for all classes
     {
         playerClass = CharacterClassData.getClass();
-        Debug.Log(maxSpeed.ToString());
+        //Debug.Log(maxSpeed.ToString());
         accel = accel * (float)(CharacterClassData.getClassSpeed(playerClass));
 		decel = decel * (float)(1 / CharacterClassData.getClassSpeed (playerClass));
-        Debug.Log(maxSpeed.ToString() + "< NEW ONE");
+        //Debug.Log(maxSpeed.ToString() + "< NEW ONE");
         jumpForce = jumpForce * (float)(CharacterClassData.getClassJump(playerClass));
         secondJumpForce = secondJumpForce * (float)(CharacterClassData.getClassJump(playerClass));
         thirdJumpForce = thirdJumpForce * (float)(CharacterClassData.getClassJump(playerClass));
