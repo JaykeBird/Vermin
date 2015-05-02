@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ namespace Assets.Physics_Platformer_Kit.Scripts
 {
     public static class CharacterClassData  //stores player data in between scene changes
     {
-        public static enum characterClass { SQUIRREL, RACCOON, FERRET, BIRD };
+        public  enum characterClass { SQUIRREL, RACCOON, FERRET, BIRD };
         public characterClass playerCharacterClass = characterClass.SQUIRREL; //player is a squirrel by default
 
 
@@ -101,4 +101,4 @@ namespace Assets.Physics_Platformer_Kit.Scripts
             }
         }
     }
-}
+}*/
