@@ -84,16 +84,20 @@ public class CharacterMotor : MonoBehaviour
 	// apply friction to rigidbody, and make sure it doesn't exceed its max speed
 	public void ManageSpeed(float deceleration, float maxSpeed, bool ignoreY)
 	{	
+		//Debug.Log ("currentSpeed: " + currentSpeed.magnitude);
 		currentSpeed = rigidbody.velocity;
+		//Debug.Log ("currentSpeed: " + currentSpeed.magnitude);
 		if (ignoreY)
 			currentSpeed.y = 0;
 		
 		if (currentSpeed.magnitude > 0)
 		{
+
 			rigidbody.AddForce ((currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
-			if (rigidbody.velocity.magnitude > maxSpeed)
-				rigidbody.AddForce ((currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
+			//if (rigidbody.velocity.magnitude > maxSpeed)
+				//rigidbody.AddForce ((currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
 		}
+		Debug.Log ("currentSpeed: " + currentSpeed.magnitude + "max speed: " + rigidbody.velocity.magnitude);
 	}
 
 }
