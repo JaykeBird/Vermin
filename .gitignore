@@ -41,4 +41,5 @@ UnityVS.Vermin.CSharp.csproj
 *.exe
 *.dll
 Vermin_Data/
+Vermin_0_2_0_Data/
 *.orig
