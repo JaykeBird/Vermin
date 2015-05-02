@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-//using Assets.Physics_Platformer_Kit.Scripts;
+using Assets.Physics_Platformer_Kit.Scripts;
 
 //handles player movement, utilising the CharacterMotor class
 [RequireComponent(typeof(CharacterMotor))]
@@ -37,7 +37,7 @@ public class PlayerMove : MonoBehaviour
     [HideInInspector]
     public int onEnemyBounce;
 
-//    private CharacterClassData.characterClass playerClass=CharacterClassData.characterClass.SQUIRREL; //Player is a Squirrel by default
+    private CharacterClassData.characterClass playerClass=CharacterClassData.characterClass.SQUIRREL; //Player is a Squirrel by default
     private int onJump;
     private bool grounded;
     private Transform[] floorCheckers;
@@ -66,6 +66,9 @@ public class PlayerMove : MonoBehaviour
     {
         // Instantiates the GUIManager.
         gui = FindObjectOfType(typeof(GUIManager)) as GUIManager;
+
+        //Initializes the Player's class type and other changes
+        applyPlayerClass();
 
         //create single floorcheck in centre of object, if none are assigned
         if(!floorChecks)
@@ -336,7 +339,7 @@ public class PlayerMove : MonoBehaviour
             airPressTime = Time.time;
         
         //if were on ground within slope limit
-        if (grounded && slope < slopeLimit)
+        if (grounded && slope < slopeLimit || playerClass==CharacterClassData.characterClass.BIRD)
         {
             //and we press jump, or we pressed jump justt before hitting the ground
             if (Input.GetButtonDown ("Jump") || airPressTime + jumpLeniancy > Time.time)
@@ -368,16 +371,27 @@ public class PlayerMove : MonoBehaviour
         airPressTime = 0f;
     }
 
-    // Pause Menu functionality
+    public void applyPlayerClass() //amplifies the jump height and movement speed for all classes
+    {
+        playerClass = CharacterClassData.getClass();
+        maxSpeed = maxSpeed * (float)(CharacterClassData.getClassSpeed(playerClass));
+        jumpForce = jumpForce * (float)(CharacterClassData.getClassJump(playerClass));
+        secondJumpForce = secondJumpForce * (float)(CharacterClassData.getClassJump(playerClass));
+        thirdJumpForce = thirdJumpForce * (float)(CharacterClassData.getClassJump(playerClass));
 
+        if (CharacterClassData.getClass() == CharacterClassData.characterClass.BIRD) //does extra for the bird
+        {
+            float temp = accel; accel = airAccel; airAccel = temp;  //swaps the acceleration parameters for air and ground
+            temp = decel; decel = airDecel; airDecel = temp;
+        }
+    }
 
     #region Pause
 
     public void Continue()
-    {
-        gui.Unpause();
-
-    }
+   	{
+   		gui.Unpause();
+   	}
 
     public void Reset()
     {
@@ -390,7 +404,6 @@ public class PlayerMove : MonoBehaviour
     {
         Application.LoadLevel("MainMenu");
     }
-
 
     #endregion
 }
