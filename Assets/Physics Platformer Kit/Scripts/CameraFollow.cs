@@ -118,47 +118,58 @@ public class CameraFollow : MonoBehaviour
 	private bool inTheWay()
 	{
 		bool done = false;
-		while (!done) 
+		RaycastHit hitinfo;
+		Vector3 heading = target.position - transform.position;
+
+		if(Physics.Raycast (transform.position, heading/heading.magnitude, out hitinfo, heading.magnitude))
 		{
-			RaycastHit hitinfo;
-			Vector3 heading = target.position - transform.position;
-
-			if(Physics.Raycast (transform.position, heading/heading.magnitude, out hitinfo, heading.magnitude))
+			//Debug.Log ("Something was hit.");
+			if(hitinfo.transform != target)
 			{
-				Debug.Log ("Something was hit by the Raycast");
-				if(hitinfo.transform != target)
-				{
+				//Debug.Log ("It was not the player");
+				Vector3 a = new Vector3(hitinfo.point.x,hitinfo.point.y,hitinfo.point.z);
+				Vector3 b = new Vector3(transform.position.x,transform.position.y,transform.position.z);
+				Vector3 c = new Vector3(target.position.x,target.position.y,transform.position.z);
 
+
+
+				if(Vector3.Distance (a,b) < Vector3.Distance (c, b))
+				//if(Vector3.Angle (heading, b-a) < Mathf.PI /2)
+				{
+					/*Debug.Log ("To other: " + Vector3.Distance (a,b));
+					Debug.Log ("To Player: " + Vector3.Distance (c,b));
+					Debug.Log ("Other: (" + a.x + "," + a.y + "," + a.z + ")");
+					Debug.Log ("Player: (" + c.x + "," + c.y + "," + c.z + ")");
+					Debug.Log ("Camera: (" + b.x + "," + b.y + "," + b.z + ")");
+					Debug.Log ("It was closer than the player");*/
 					MeshRenderer h =  hitinfo.transform.GetComponentInParent<MeshRenderer>();
 					h.enabled = false;
 					hits.Add (h);
-
-
-					for(int i = 0 ; i<hits.Count;i++)
-					{
-						if(hits[i].GetComponentInParent<Transform>() != hitinfo.transform)
-						{
-							hits[i].enabled = true;
-							hits.RemoveAt (i);
-						}
-					}
-
-
-
-				}else{
-					hitinfo = new RaycastHit();
-					for(int i = 0 ; i<hits.Count;i++)
-					{
-						hits[i].enabled = true;
-						hits.RemoveAt (i);
-					}
 				}
-					
+
+
+
+					//for(int i = 0 ; i<hits.Count;i++)
+					//{
+					//	if(hits[i].GetComponentInParent<Transform>() != hitinfo.transform)
+					//	{
+					//		hits[i].enabled = true;
+					//		hits.RemoveAt (i);
+					//	}
+					//}
+
+
+
+			}else{
+				hitinfo = new RaycastHit();
+				for(int i = 0 ; i<hits.Count;i++)
+				{
+					hits[i].enabled = true;
+					hits.RemoveAt (i);
+				}
 			}
 				
-
-			return true;
 		}
-		return true;
+		return false;
 	}
 }
