@@ -25,15 +25,15 @@ namespace Assets.Physics_Platformer_Kit.Scripts
         {
             if (myClass == characterClass.SQUIRREL)
             {
-                return 1;
+                return 1.1;
             }
             if (myClass == characterClass.RACCOON)
             {
-                return 0.75;
+                return 1;
             }
             if (myClass == characterClass.FERRET)
             {
-                return 1.5;
+                return 1.2;
             }
             else //if (myClass == characterClass.BIRD)
             {
