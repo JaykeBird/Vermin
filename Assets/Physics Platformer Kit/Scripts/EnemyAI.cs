@@ -27,6 +27,7 @@ public class EnemyAI : MonoBehaviour
     public GameObject trapBounds;
     private TriggerParent trapTrigger;
 
+    private bool isSleeping = false;
 
     public GameObject stashBound;
     private TriggerParent stashTrigger;
@@ -39,7 +40,7 @@ public class EnemyAI : MonoBehaviour
     private CharacterMotor characterMotor;
     private DealDamage dealDamage;
     private GUIManager gui;
-	public int coins;
+    public int coins;
     [HideInInspector]
 
     
@@ -47,7 +48,7 @@ public class EnemyAI : MonoBehaviour
     void Awake()
     {		
         // Instantiates the GUIManager.
-		coins = 0;
+        coins = 0;
         gui = FindObjectOfType(typeof(GUIManager)) as GUIManager;
 
         cSpeedLimit = speedLimit;
@@ -98,10 +99,11 @@ public class EnemyAI : MonoBehaviour
     {
         if (!gui.pauseGame)
         {
-            if (this.rigidbody.IsSleeping())
+            if (isSleeping)
             {
                 Debug.Log("Is Sleeping");
-                this.rigidbody.WakeUp();
+                this.rigidbody.constraints = RigidbodyConstraints.None;
+                isSleeping = false;
             }
 
             if (trapTrigger && trapTrigger.colliding)
@@ -118,7 +120,7 @@ public class EnemyAI : MonoBehaviour
                     Vector3 e = transform.position;
                     Vector3 i = e - f;
                     i.Normalize();
-					i.y = 0;
+                    i.y = 0;
                     this.rigidbody.AddForce(i * 20, ForceMode.VelocityChange);
                 }
                 if (trapTrigger.hitObject.tag == "Vacuum")
@@ -186,10 +188,11 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            if (!this.rigidbody.IsSleeping())
+            if (!isSleeping)
             {
                 Debug.Log("Go to sleep");
-                this.rigidbody.Sleep();
+                this.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+                isSleeping = true;
             }
             
         }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 //ATTACH TO MAIN CAMERA, shows your health and coins
 public class GUIManager : MonoBehaviour  //Fuck you tom
@@ -17,6 +18,7 @@ public class GUIManager : MonoBehaviour  //Fuck you tom
     private int itemsInLevel;
 
     public bool pauseGame = false;
+    private Func<int> unpauser;
     
     //setup, get how many coins are in this level
     void Start()
@@ -37,7 +39,7 @@ public class GUIManager : MonoBehaviour  //Fuck you tom
 
             int count = 0;
 
-			for(int i = 0; i<stashes.Count; i++)
+            for(int i = 0; i<stashes.Count; i++)
             {
                 //count++;
                 GUILayout.Label("Stash " + i + " : " + stashes[i].getStashNum ());
@@ -62,17 +64,19 @@ public class GUIManager : MonoBehaviour  //Fuck you tom
         }
     }
 
+    #region "Stashes"
+
     public int TotalNumberOfCoinsInStashes()
     {
         /*int c;
 
-		for(int i = 0; i < stashes.Count; i++)
+        for(int i = 0; i < stashes.Count; i++)
         {
-			c += stashes[i].getStashNum;
+            c += stashes[i].getStashNum;
         }
 
         return c;*/
-		return 0;
+        return 0;
     }
 
     public void DepositCoinsInStash(int id, int coins)
@@ -122,10 +126,23 @@ public class GUIManager : MonoBehaviour  //Fuck you tom
             stashcoins[id] = stashcoins[id] - coins;
             return coins;
         }*/
-		return 0;
+        return 0;
 
         
     }
+
+    public void addStash(Stash s)
+    {
+        stashes.Add(s);
+    }
+    public void updateStashes()
+    {
+
+    }
+
+    #endregion
+
+    #region "Items"
 
     public bool UseItem(int id)
     {
@@ -181,12 +198,27 @@ public class GUIManager : MonoBehaviour  //Fuck you tom
             Debug.Log("Item " + item.Name + " with " + item.Count.ToString() + " items");
         }
     }
-	public void addStash(Stash s)
-	{
-		stashes.Add (s);
-	}
-	public void updateStashes()
-	{
 
-	}
+
+    #endregion
+
+    public void SetUnpauser(Func<int> unpauser)
+    {
+        Debug.Log("SETTING UNPAUISER");
+        this.unpauser = unpauser;
+    }
+
+    public void Pause()
+    {
+
+        pauseGame = true;
+    }
+
+    public void Unpause()
+    {
+        Debug.Log("Unpausing");
+        pauseGame = false;
+        int i = unpauser.Invoke();
+    }
+
 }

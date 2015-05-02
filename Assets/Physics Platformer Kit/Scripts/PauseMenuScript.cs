@@ -6,6 +6,8 @@ public class PauseMenuScript : MonoBehaviour {
     private GUIManager gui;
     private Canvas canvas;
 
+    public GameObject player;
+
     void Awake()
     {
         gui = FindObjectOfType(typeof(GUIManager)) as GUIManager;
@@ -21,17 +23,6 @@ public class PauseMenuScript : MonoBehaviour {
     
     }
 
-    public void GoToMainMenu()
-    {
-        Application.LoadLevel("MainMenu");
 
-    }
-
-    public void Continue()
-    {
-        gui.pauseGame = false;
-        canvas = FindObjectOfType(typeof(Canvas)) as Canvas;
-        
-    }
 
 }

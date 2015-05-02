@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     public bool sidescroller;					//if true, won't apply vertical input
     public Transform mainCam, floorChecks;		//main camera, and floorChecks object. FloorChecks are raycasted down from to check the player is grounded.
     public Animator animator;					//object with animation controller on, which you want to animate
+    
     public AudioClip jumpSound;					//play when jumping
     public AudioClip landSound;					//play when landing on ground
     
@@ -53,6 +54,10 @@ public class PlayerMove : MonoBehaviour
     public GameObject fan;
     public GameObject glue;
     public GameObject vacuum;
+
+    // base pause menu stuff
+    public Animator pauseAnimator;                  // this is where we go to do the pausing and the animating and the yeah
+    public Vector3 startLoc = new Vector3(0, 13, 0);// the location where we start this level
     
     //setup
     void Awake()
@@ -92,8 +97,11 @@ public class PlayerMove : MonoBehaviour
         Canvas[] canv = GameObject.FindObjectsOfType<Canvas>();
         foreach (Canvas c in canv)
         {
-            c.renderer.enabled = false;
+            //c.renderer.enabled = false;
         }
+
+        // Set unpauser for GUI Manager
+        gui.SetUnpauser(Unpause);
     }
     
     //get state of player, values and input
@@ -204,14 +212,33 @@ public class PlayerMove : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!gui.pauseGame)
             {
                 Debug.Log("Open pause menu");
-                //gui.pauseGame = true;
-                Application.LoadLevel("MainMenu");
+                gui.Pause();
+
+                this.rigidbody.velocity = Vector3.zero;
+
+                pauseAnimator.SetBool("Paused", true);
             }
+            else
+            {
+                Continue();
+            }
+            //Application.LoadLevel("MainMenu");
         }
         
+    }
+    
+    public int Unpause()
+    {
+        Debug.Log("Unpausing animation");
+        pauseAnimator.SetBool("Paused", false);
+        return 0;
     }
     
     //prevents rigidbody from sliding down slight slopes (read notes in characterMotor class for more info on friction)
@@ -255,13 +282,13 @@ public class PlayerMove : MonoBehaviour
                     if (hit.transform.tag == "Enemy" && rigidbody.velocity.y < 0)
                     {
                         enemyAI = hit.transform.GetComponent<EnemyAI>();
-						if(enemyAI.coins>0)
-						{
-							enemyAI.coins--;
-							gui.coinsCollected++;
-						}
+                        if(enemyAI.coins>0)
+                        {
+                            enemyAI.coins--;
+                            gui.coinsCollected++;
+                        }
 
-						//enemyAI.BouncedOn();
+                        //enemyAI.BouncedOn();
                         //onEnemyBounce ++;
                         //dealDamage.Attack(hit.transform.gameObject, 1, 0f, 0f);
                     }
@@ -338,4 +365,30 @@ public class PlayerMove : MonoBehaviour
         rigidbody.AddRelativeForce (jumpVelocity, ForceMode.Impulse);
         airPressTime = 0f;
     }
+
+    // Pause Menu functionality
+
+
+    #region Pause
+
+    public void Continue()
+    {
+        gui.Unpause();
+
+    }
+
+    public void Reset()
+    {
+        this.rigidbody.position = startLoc;
+        gui.Unpause();
+
+    }
+
+    public void GoToMainMenu()
+    {
+        Application.LoadLevel("MainMenu");
+    }
+
+
+    #endregion
 }
