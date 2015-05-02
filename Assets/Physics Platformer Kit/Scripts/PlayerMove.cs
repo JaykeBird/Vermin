@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-//using Assets.Physics_Platformer_Kit.Scripts;
+using Assets.Physics_Platformer_Kit.Scripts;
 
 //handles player movement, utilising the CharacterMotor class
 [RequireComponent(typeof(CharacterMotor))]
@@ -36,7 +36,7 @@ public class PlayerMove : MonoBehaviour
     [HideInInspector]
     public int onEnemyBounce;
 
-//    private CharacterClassData.characterClass playerClass=CharacterClassData.characterClass.SQUIRREL; //Player is a Squirrel by default
+    private CharacterClassData.characterClass playerClass=CharacterClassData.characterClass.SQUIRREL; //Player is a Squirrel by default
     private int onJump;
     private bool grounded;
     private Transform[] floorCheckers;
