@@ -218,6 +218,15 @@ public class PlayerMove : MonoBehaviour
             }
 
         }
+        else
+        {
+            float i = Input.GetAxisRaw("Horizontal");
+
+            if (i == 1)
+            {
+                GoToMainMenu();
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -404,6 +413,7 @@ public class PlayerMove : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        Debug.Log("What");
         Application.LoadLevel("MainMenu");
     }
 
