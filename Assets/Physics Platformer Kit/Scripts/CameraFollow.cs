@@ -128,10 +128,13 @@ public class CameraFollow : MonoBehaviour
 				Debug.Log ("Something was hit by the Raycast");
 				if(hitinfo.transform != target)
 				{
+					if(Vector3.Distance (transform.position, hitinfo.transform.position) < Vector3.Distance (transform.position,target.position))
+					{
+						MeshRenderer h =  hitinfo.transform.GetComponentInParent<MeshRenderer>();
+						h.enabled = false;
+						hits.Add (h);
+					}
 
-					MeshRenderer h =  hitinfo.transform.GetComponentInParent<MeshRenderer>();
-					h.enabled = false;
-					hits.Add (h);
 
 
 					for(int i = 0 ; i<hits.Count;i++)
