@@ -340,4 +340,34 @@ public class PlayerMove : MonoBehaviour
         rigidbody.AddRelativeForce (jumpVelocity, ForceMode.Impulse);
         airPressTime = 0f;
     }
+
+    public void applyPlayerClass() //amplifies the jump height and movement speed for all classes
+    {
+        maxSpeed = maxSpeed * (float)(CharacterClassData.getClassSpeed(playerClass));
+        jumpForce = jumpForce * (float)(CharacterClassData.getClassJump(playerClass));
+        secondJumpForce = secondJumpForce * (float)(CharacterClassData.getClassJump(playerClass));
+        thirdJumpForce = thirdJumpForce * (float)(CharacterClassData.getClassJump(playerClass));
+
+        if (CharacterClassData.getClass() == CharacterClassData.characterClass.BIRD) //does extra for the bird
+        {
+            float temp = accel; accel = airAccel; airAccel = temp;  //swaps the acceleration parameters for air and ground
+            temp = decel; decel = airDecel; airDecel = temp;
+        }
+    }
+    /**
+    //movement
+    public float accel = 70f;					//acceleration/deceleration in air or on the ground
+    public float airAccel = 18f;
+    public float decel = 7.6f;
+    public float airDecel = 1.1f;
+    [Range(0f, 5f)]
+    public float rotateSpeed = 0.7f, airRotateSpeed = 0.4f;	//how fast to rotate on the ground, how fast to rotate in the air
+    public float maxSpeed = 9;								//maximum speed of movement in X/Z axis
+    public float slopeLimit = 40, slideAmount = 35;			//maximum angle of slopes you can walk on, how fast to slide down slopes you can't
+    public float movingPlatformFriction = 7.7f;				//you'll need to tweak this to get the player to stay on moving platforms properly
+
+    //jumping
+    public Vector3 jumpForce = new Vector3(0, 13, 0);		//normal jump force
+    public Vector3 secondJumpForce = new Vector3(0, 13, 0); //the force of a 2nd consecutive jump
+    public Vector3 thirdJumpForce = new Vector3(0, 13, 0);	//the force of a 3rd consecutive jump*/
 }

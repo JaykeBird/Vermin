@@ -7,21 +7,21 @@ namespace Assets.Physics_Platformer_Kit.Scripts
 {
     public static class CharacterClassData  //stores player data in between scene changes
     {
-        public static enum characterClass { SQUIRREL, RACCOON, FERRET, BIRD };
-        public characterClass playerCharacterClass = characterClass.SQUIRREL; //player is a squirrel by default
+        public enum characterClass { SQUIRREL, RACCOON, FERRET, BIRD };
+        private static characterClass playerCharacterClass = characterClass.SQUIRREL; //player is a squirrel by default
 
 
-        public void setClass(characterClass newClass)
+        public static void setClass(characterClass newClass)
         {
             playerCharacterClass = newClass;
         }
-        public characterClass getClass()
+        public static characterClass getClass()
         {
             return playerCharacterClass;
         }
 
 
-        public double getClassJump(characterClass myClass) //returns the multiplier for this class's Jump Height
+        public static double getClassJump(characterClass myClass) //returns the multiplier for this class's Jump Height
         {
             if (myClass == characterClass.SQUIRREL)
             {
@@ -37,10 +37,10 @@ namespace Assets.Physics_Platformer_Kit.Scripts
             }
             else //if (myClass == characterClass.BIRD)
             {
-                return -1;     //returns negative one for the magpie, which "jumps" in a different way
+                return 0.5;     //The bird is able to make small hops and jump while in the air
             }
         }
-        public double getClassSpeed(characterClass myClass) //returns the multiplier for this class's Speed
+        public static double getClassSpeed(characterClass myClass) //returns the multiplier for this class's Speed
         {
             if (myClass == characterClass.SQUIRREL)
             {
@@ -59,7 +59,7 @@ namespace Assets.Physics_Platformer_Kit.Scripts
                 return 1;
             }
         }
-        public int getClassCapacity(characterClass myClass) //returns the coin capacity for each class
+        public static int getClassCapacity(characterClass myClass) //returns the coin capacity for each class
         {
             if (myClass == characterClass.SQUIRREL)
             {
@@ -78,7 +78,7 @@ namespace Assets.Physics_Platformer_Kit.Scripts
                 return 8;
             }
         }
-        public bool getClassKnockOver(characterClass myClass) //returns whether or not the class can knock over furniture
+        public static bool getClassKnockOver(characterClass myClass) //returns whether or not the class can knock over furniture
         {
             if (myClass == characterClass.RACCOON)
             {
@@ -89,7 +89,7 @@ namespace Assets.Physics_Platformer_Kit.Scripts
                 return false;
             }
         }
-        public bool getClassCanClimb(characterClass myClass) //returns whether or not the class can climb vertical objects
+        public static bool getClassCanClimb(characterClass myClass) //returns whether or not the class can climb vertical objects
         {
             if (myClass == characterClass.SQUIRREL)
             {
