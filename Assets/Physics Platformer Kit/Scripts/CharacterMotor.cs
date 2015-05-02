@@ -97,7 +97,7 @@ public class CharacterMotor : MonoBehaviour
 			//if (rigidbody.velocity.magnitude > maxSpeed)
 				//rigidbody.AddForce ((currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
 		}
-		Debug.Log ("currentSpeed: " + currentSpeed.magnitude + "max speed: " + rigidbody.velocity.magnitude);
+		//Debug.Log ("currentSpeed: " + currentSpeed.magnitude + "max speed: " + rigidbody.velocity.magnitude);
 	}
 
 }
