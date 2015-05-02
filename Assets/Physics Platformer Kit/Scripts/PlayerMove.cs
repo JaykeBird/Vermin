@@ -385,11 +385,29 @@ public class PlayerMove : MonoBehaviour
         playerClass = CharacterClassData.getClass();
         //Debug.Log(maxSpeed.ToString());
         accel = accel * (float)(CharacterClassData.getClassSpeed(playerClass));
-		decel = decel * (float)(1 / CharacterClassData.getClassSpeed (playerClass));
+        decel = decel * (float)(1 / CharacterClassData.getClassSpeed (playerClass));
         //Debug.Log(maxSpeed.ToString() + "< NEW ONE");
         jumpForce = jumpForce * (float)(CharacterClassData.getClassJump(playerClass));
         secondJumpForce = secondJumpForce * (float)(CharacterClassData.getClassJump(playerClass));
         thirdJumpForce = thirdJumpForce * (float)(CharacterClassData.getClassJump(playerClass));
+
+        CharacterClassData.characterClass ctype = CharacterClassData.getClass();
+
+        switch (ctype)
+        {
+            case CharacterClassData.characterClass.SQUIRREL:
+                
+                break;
+            case CharacterClassData.characterClass.RACCOON:
+                break;
+            case CharacterClassData.characterClass.FERRET:
+                break;
+            case CharacterClassData.characterClass.BIRD:
+                break;
+            default:
+                break;
+        }
+
 
         if (CharacterClassData.getClass() == CharacterClassData.characterClass.BIRD) //does extra for the bird
         {
@@ -401,9 +419,9 @@ public class PlayerMove : MonoBehaviour
     #region Pause
 
     public void Continue()
-   	{
-   		gui.Unpause();
-   	}
+    {
+        gui.Unpause();
+    }
 
     public void Reset()
     {
