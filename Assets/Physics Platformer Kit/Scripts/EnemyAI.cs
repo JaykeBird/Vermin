@@ -147,7 +147,17 @@ public class EnemyAI : MonoBehaviour
 
             //chase
             if (sightTrigger && sightTrigger.colliding && chase)
-            {
+			{	RaycastHit hitinfo;
+				Vector3 heading = sightTrigger.hitObject.transform.position-transform.position;
+
+				if(Physics.Raycast (transform.position, heading/heading.magnitude, out hitinfo, heading.magnitude))
+				{
+					if(hitinfo.transform.Equals (sightTrigger.hitObject.transform.position))
+					{
+						Debug.Log ("There is something in the way.");
+					}
+
+				}
                 characterMotor.MoveTo(sightTrigger.hitObject.transform.position, acceleration, chaseStopDistance, ignoreY);
                 //nofity animator controller
                 if (animatorController)

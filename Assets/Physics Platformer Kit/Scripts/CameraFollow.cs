@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
 
 public class CameraFollow : MonoBehaviour 
 {
@@ -10,8 +13,10 @@ public class CameraFollow : MonoBehaviour
 	public bool mouseFreelook;									//should the camera be rotated with the mouse? (only if camera is not fixed)
 	public float rotateDamping = 100;							//how fast camera rotates to look at target
 	public GameObject waterFilter;								//object to render in front of camera when it is underwater
-	public string[] avoidClippingTags;							//tags for big objects in your game, which you want to camera to try and avoid clipping with
-	
+	public string[] avoidClippingTags;							//tags for big objects in your game, which you want to camera to try and avoid clipping with										//the Trigger Parent.
+
+	private MeshRenderer h;
+	private List<MeshRenderer> hits;
 	private Transform followTarget;
 	private bool camColliding;
 	
@@ -28,6 +33,7 @@ public class CameraFollow : MonoBehaviour
 		//don't smooth rotate if were using mouselook
 		if(mouseFreelook)
 			rotateDamping = 0f;
+
 	}
 	
 	//run our camera functions each frame
@@ -41,6 +47,9 @@ public class CameraFollow : MonoBehaviour
 			SmoothLookAt();
 		else
 			transform.LookAt(target.position);
+
+		inTheWay ();
+
 	}
 
 	//toggle waterfilter, is camera clipping walls?
@@ -105,5 +114,44 @@ public class CameraFollow : MonoBehaviour
 			//otherwise, move cam to intended position
 			transform.position = nextFramePosition;
 		}
+	}
+	private bool inTheWay()
+	{
+		bool done = false;
+		while (!done) 
+		{
+			RaycastHit hitinfo;
+			Vector3 heading = target.position - transform.position;
+
+			if(Physics.Raycast (transform.position, heading/heading.magnitude, out hitinfo, heading.magnitude))
+			{
+				Debug.Log ("Something was hit by the Raycast");
+				if(hitinfo.transform != target)
+				{
+
+					h =  hitinfo.transform.GetComponentInParent<MeshRenderer>();
+					h.enabled = false;
+
+
+
+					if(h.GetComponentInParent<Transform>() != hitinfo.transform)
+					{
+						Debug.Log ("Enabled!");
+						h.enabled = true;
+						h = null;
+					}
+				}else{
+					if(h)
+					{
+						h.enabled = true;
+					}
+				}
+					
+			}
+				
+
+			return true;
+		}
+		return true;
 	}
 }
