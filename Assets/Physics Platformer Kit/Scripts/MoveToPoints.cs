@@ -57,7 +57,8 @@ public class MoveToPoints : MonoBehaviour
 		{
 			if(!arrived)
 			{
-				if (Vector3.Distance(transform.position, waypoints[currentWp].position) < 0.3f)
+				Debug.Log ("Distance is: " + Vector3.Distance(transform.position, waypoints[currentWp].position));
+				if (Vector3.Distance(transform.position, waypoints[currentWp].position) < 0.6f) //checking arrival!
 				{
 					arrivalTime = Time.time;
 					arrived = true;
