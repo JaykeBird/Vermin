@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Physics_Platformer_Kit.Scripts;
 
 //simple "platformer enemy" AI
 [RequireComponent(typeof(CharacterMotor))]
@@ -40,6 +41,7 @@ public class EnemyAI : MonoBehaviour
     private CharacterMotor characterMotor;
     private DealDamage dealDamage;
     private GUIManager gui;
+    private CharacterClassData.characterClass playerClass=CharacterClassData.getClass();
     public int coins;
     [HideInInspector]
 
@@ -183,8 +185,8 @@ public class EnemyAI : MonoBehaviour
 
                 if (gui.coinsCollected > 0 && attackTrigger.hitObject.transform.position.y <= transform.position.y+transform.localScale.y/2f)
                 {
-                    gui.coinsCollected--;
-                    coins++;
+                    gui.coinsCollected -= CharacterClassData.getCoinLossAmount(playerClass);
+                    coins += CharacterClassData.getCoinLossAmount(playerClass);
                     Debug.Log(coins.ToString());
                 }
 

@@ -2,7 +2,53 @@ fileFormatVersion: 2
 guid: cab287ffc73dfdd498b9276937e87d57
 ModelImporter:
   serializedVersion: 16
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: BackLegR
+    100002: BackLegR_001
+    100004: Body
+    100006: BodyRef
+    100008: FrontLegR
+    100010: FrontLegR_001
+    100012: LEar
+    100014: //RootNode
+    100016: REar
+    100018: Tail
+    400000: BackLegR
+    400002: BackLegR_001
+    400004: Body
+    400006: BodyRef
+    400008: FrontLegR
+    400010: FrontLegR_001
+    400012: LEar
+    400014: //RootNode
+    400016: REar
+    400018: Tail
+    2300000: BackLegR
+    2300002: BackLegR_001
+    2300004: Body
+    2300006: FrontLegR
+    2300008: FrontLegR_001
+    2300010: LEar
+    2300012: REar
+    2300014: Tail
+    3300000: BackLegR
+    3300002: BackLegR_001
+    3300004: Body
+    3300006: FrontLegR
+    3300008: FrontLegR_001
+    3300010: LEar
+    3300012: REar
+    3300014: Tail
+    4300000: REar
+    4300002: LEar
+    4300004: BackLegR_001
+    4300006: FrontLegR_001
+    4300008: Tail
+    4300010: FrontLegR
+    4300012: BackLegR
+    4300014: Body
+    7400000: Default Take
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
