@@ -109,12 +109,17 @@ public class EnemyAI : MonoBehaviour
                 this.rigidbody.constraints = RigidbodyConstraints.None;
                 isSleeping = false;
             }
+			if(transform.position.y < -1)
+			{
+				transform.Translate(Vector3.up* 2);
+				Debug.Log ("We moved on up!");
+			}
 
             if (trapTrigger && trapTrigger.colliding)
             {
                 if (trapTrigger.hitObject.tag == "Glue")
                 {
-                    Debug.Log("Sticky");
+                    //Debug.Log("Sticky");
                     speedLimit = 2f;
                     acceleration = 4f;
                 }
@@ -132,6 +137,7 @@ public class EnemyAI : MonoBehaviour
                     Vector3 a = trapTrigger.hitObject.transform.position;
                     Vector3 b = transform.position;
                     Vector3 c = a - b;
+					c.y = 0;
                     c.Normalize();
                     this.rigidbody.AddForce(c * 20, ForceMode.VelocityChange);
 
