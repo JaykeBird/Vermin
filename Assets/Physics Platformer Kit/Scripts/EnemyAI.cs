@@ -114,6 +114,10 @@ public class EnemyAI : MonoBehaviour
 				transform.Translate(Vector3.up* 2);
 				Debug.Log ("We moved on up!");
 			}
+			if(transform.position.y > 0.5)
+			{
+				transform.Translate (Vector3.down * 2);
+			}
 
             if (trapTrigger && trapTrigger.colliding)
             {
