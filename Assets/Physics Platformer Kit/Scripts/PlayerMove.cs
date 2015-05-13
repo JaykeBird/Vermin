@@ -112,6 +112,10 @@ public class PlayerMove : MonoBehaviour
     //get state of player, values and input
     void Update()
     {
+	
+		if (GameManager.Instance.Paused) 
+			return;
+	
         if (!gui.pauseGame)
         {
             //handle jumping
@@ -142,6 +146,8 @@ public class PlayerMove : MonoBehaviour
     //apply correct player movement (fixedUpdate for physics calculations)
     void FixedUpdate() 
     {
+		//if (GameManager.Instance.Paused)
+		//	return;
         if (!gui.pauseGame)
         {
             //are we grounded

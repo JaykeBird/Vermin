@@ -99,6 +99,8 @@ public class EnemyAI : MonoBehaviour
     
     void Update()
     {
+		if (GameManager.Instance.Paused)
+			return;
         if (!gui.pauseGame)
         {
             if (isSleeping)
@@ -212,6 +214,8 @@ public class EnemyAI : MonoBehaviour
     
     void FixedUpdate()
     {
+		if (GameManager.Instance.Paused)
+			return;
         if (!gui.pauseGame)
         {
             characterMotor.ManageSpeed(deceleration, speedLimit, ignoreY);

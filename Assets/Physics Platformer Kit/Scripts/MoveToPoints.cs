@@ -52,6 +52,8 @@ public class MoveToPoints : MonoBehaviour
 	
 	void Update()
 	{
+		if (GameManager.Instance.Paused)
+			return;
 		//if we've arrived at waypoint, get the next one
 		if(waypoints.Count > 0)
 		{
@@ -93,6 +95,8 @@ public class MoveToPoints : MonoBehaviour
 	//if this is a platform move platforms toward waypoint
 	void FixedUpdate()
 	{
+		if (GameManager.Instance.Paused)
+			return;
 		if(transform.tag != "Enemy")
 		{
 			if(!arrived && waypoints.Count > 0)
