@@ -8,7 +8,7 @@ namespace Assets.Physics_Platformer_Kit.Scripts
     public static class CharacterClassData  //stores player data in between scene changes
     {
         public enum characterClass { SQUIRREL, RACCOON, FERRET, BIRD };
-		private static characterClass playerCharacterClass = characterClass.SQUIRREL; //player is a squirrel by default
+		private static characterClass playerCharacterClass = characterClass.RACCOON; //player is a squirrel by default
 
 
         public static void setClass(characterClass newClass)
