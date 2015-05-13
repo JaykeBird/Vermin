@@ -151,8 +151,9 @@ public class EnemyAI : MonoBehaviour
 
             if (stashTrigger && stashTrigger.colliding)
             {
-                //coins++;
-                //theStash.GetComponent<Stash>().coinWithdraw();
+                
+                if(theStash.GetComponent<Stash>().coinWithdraw())
+					coins++;
             }
 
             //chase
@@ -220,8 +221,8 @@ public class EnemyAI : MonoBehaviour
     
     void FixedUpdate()
     {
-		if (GameManager.Instance.Paused)
-			return;
+		//if (GameManager.Instance.Paused)
+			//return;
         if (!gui.pauseGame)
         {
             characterMotor.ManageSpeed(deceleration, speedLimit, ignoreY);
