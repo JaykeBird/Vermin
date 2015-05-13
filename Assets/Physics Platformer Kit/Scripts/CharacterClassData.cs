@@ -100,5 +100,24 @@ namespace Assets.Physics_Platformer_Kit.Scripts
                 return false;
             }
         }
+        public static int getCoinLossAmount(characterClass myClass)
+        {
+            if (myClass == characterClass.SQUIRREL)
+            {
+                return 2;
+            }
+            else if (myClass == characterClass.RACCOON)
+            {
+                return 0;
+            }
+            else if (myClass == characterClass.FERRET)
+            {
+                return 1;
+            }
+            else //if (myClass == characterClass.BIRD)
+            {
+                return 1;
+            }
+        }
     }
 }
