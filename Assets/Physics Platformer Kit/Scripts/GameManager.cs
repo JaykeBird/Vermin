@@ -36,19 +36,19 @@ public class GameManager : MonoBehaviour {
             if (!paused)
             {
                 //PauseGame();
-                gui.Pause();
+                //gui.Pause();
 
-                pauseAnimator.SetBool("Paused", true);
+                pauseAnimator.SetBool("Paused", false);
             }
             else
             {
                 //PauseGame();
-                gui.Unpause();
+                //gui.Unpause();
 
-                pauseAnimator.SetBool("Paused", false);
+                pauseAnimator.SetBool("Paused", true);
             }
 
-            pauseCooldown = 80;
+            pauseCooldown = 40;
         }
 
         if (pauseCooldown > 0)
