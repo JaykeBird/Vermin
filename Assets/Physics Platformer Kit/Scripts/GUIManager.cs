@@ -202,11 +202,11 @@ public class GUIManager : MonoBehaviour  //Fuck you tom
 
     #endregion
 
-    public void SetUnpauser(Func<int> unpauser)
-    {
-        Debug.Log("SETTING UNPAUISER");
-        this.unpauser = unpauser;
-    }
+    //public void SetUnpauser(Func<int> unpauser)
+    //{
+    //    Debug.Log("SETTING UNPAUISER");
+    //    this.unpauser = unpauser;
+    //}
 
     public void Pause()
     {
@@ -217,7 +217,7 @@ public class GUIManager : MonoBehaviour  //Fuck you tom
     {
         Debug.Log("Unpausing");
         pauseGame = false;
-        int i = unpauser.Invoke();
+        //int i = unpauser.Invoke();
     }
 
 }

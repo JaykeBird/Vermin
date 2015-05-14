@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
     private bool paused = false;
 
     private GUIManager gui;
-    //public Animator pauseAnimator; // this is where we go to do the pausing and the animating and the yeah
+    public Animator pauseAnimator; // this is where we go to do the pausing and the animating and the yeah
 
     private int pauseCooldown = 0;
 
@@ -38,12 +38,14 @@ public class GameManager : MonoBehaviour {
                 //PauseGame();
                 gui.Pause();
 
-                //pauseAnimator.SetBool("Paused", true);
+                pauseAnimator.SetBool("Paused", true);
             }
             else
             {
                 //PauseGame();
                 gui.Unpause();
+
+                pauseAnimator.SetBool("Paused", false);
             }
 
             pauseCooldown = 80;

@@ -104,8 +104,6 @@ public class PlayerMove : MonoBehaviour
             //c.renderer.enabled = false;
         }
 
-        // Set unpauser for GUI Manager
-        gui.SetUnpauser(Unpause);
     }
     
     //get state of player, values and input
@@ -252,12 +250,12 @@ public class PlayerMove : MonoBehaviour
         
     }
     
-    public int Unpause()
-    {
-        Debug.Log("Unpausing animation");
-        pauseAnimator.SetBool("Paused", false);
-        return 0;
-    }
+    //public int Unpause()
+    //{
+    //    Debug.Log("Unpausing animation");
+    //    //pauseAnimator.SetBool("Paused", false);
+    //    return 0;
+    //}
     
     //prevents rigidbody from sliding down slight slopes (read notes in characterMotor class for more info on friction)
     void OnCollisionStay(Collision other)
