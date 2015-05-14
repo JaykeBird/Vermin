@@ -99,14 +99,14 @@ public class EnemyAI : MonoBehaviour
     
     void Update()
     {
-		if (GameManager.Instance.Paused)
-			return;
-        if (!gui.pauseGame)
+        if (GameManager.Instance.Paused)
+            return;
+        if (true)
         {
             if (isSleeping)
             {
                 Debug.Log("Is Sleeping");
-                this.rigidbody.constraints = RigidbodyConstraints.None;
+                //this.rigidbody.constraints = RigidbodyConstraints.None;
                 isSleeping = false;
             }
 
@@ -205,7 +205,7 @@ public class EnemyAI : MonoBehaviour
             if (!isSleeping)
             {
                 Debug.Log("Go to sleep");
-                this.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+                //this.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
                 isSleeping = true;
             }
             
@@ -214,9 +214,9 @@ public class EnemyAI : MonoBehaviour
     
     void FixedUpdate()
     {
-		if (GameManager.Instance.Paused)
-			return;
-        if (!gui.pauseGame)
+        if (GameManager.Instance.Paused)
+            return;
+        if (true)
         {
             characterMotor.ManageSpeed(deceleration, speedLimit, ignoreY);
             characterMotor.RotateToVelocity(rotateSpeed, ignoreY);

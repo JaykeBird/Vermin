@@ -58,7 +58,6 @@ public class PlayerMove : MonoBehaviour
     public GameObject vacuum;
 
     // base pause menu stuff
-    public Animator pauseAnimator;                  // this is where we go to do the pausing and the animating and the yeah
     public Vector3 startLoc = new Vector3(0, 13, 0);// the location where we start this level
     
     //setup
@@ -112,10 +111,10 @@ public class PlayerMove : MonoBehaviour
     //get state of player, values and input
     void Update()
     {
-	
-		if (GameManager.Instance.Paused) 
-			return;
-	
+    
+        if (GameManager.Instance.Paused) 
+            return;
+    
         if (!gui.pauseGame)
         {
             //handle jumping
@@ -146,8 +145,8 @@ public class PlayerMove : MonoBehaviour
     //apply correct player movement (fixedUpdate for physics calculations)
     void FixedUpdate() 
     {
-		//if (GameManager.Instance.Paused)
-		//	return;
+        //if (GameManager.Instance.Paused)
+        //	return;
         if (!gui.pauseGame)
         {
             //are we grounded
@@ -226,31 +225,30 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            float i = Input.GetAxisRaw("Horizontal");
+            this.rigidbody.velocity = Vector3.zero;
+            //float i = Input.GetAxisRaw("Horizontal");
 
-            if (i == 1)
-            {
-                GoToMainMenu();
-            }
+            //if (i == 1)
+            //{
+            //    GoToMainMenu();
+            //}
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (!gui.pauseGame)
-            {
-                Debug.Log("Open pause menu");
-                gui.Pause();
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    if (!gui.pauseGame)
+        //    {
+        //        Debug.Log("Open pause menu");
+        //        gui.Pause();
 
-                this.rigidbody.velocity = Vector3.zero;
-
-                pauseAnimator.SetBool("Paused", true);
-            }
-            else
-            {
-                Continue();
-            }
-            //Application.LoadLevel("MainMenu");
-        }
+                
+        //    }
+        //    else
+        //    {
+        //        Continue();
+        //    }
+        //    //Application.LoadLevel("MainMenu");
+        //}
         
     }
     
@@ -453,7 +451,7 @@ public class PlayerMove : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        Debug.Log("What");
+        //Debug.Log("What");
         Application.LoadLevel("MainMenu");
     }
 

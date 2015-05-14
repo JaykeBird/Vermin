@@ -2,37 +2,71 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-	private static GameManager instance;
-	private bool paused = false;
+    private static GameManager instance;
+    private bool paused = false;
 
-	public bool Paused {
-		get {
-			return paused;
-		}
-	}
+    private GUIManager gui;
+    //public Animator pauseAnimator; // this is where we go to do the pausing and the animating and the yeah
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetKeyDown(KeyCode.P))
-			PauseGame();
-	}
+    private int pauseCooldown = 0;
 
-	void PauseGame()
-	{
-		paused = !paused;
-	}
-	public static GameManager Instance {
-		get {
-			if(instance == null)
-			{
-				instance = GameObject.FindObjectOfType<GameManager>();
-			}
-			return instance;
-		}
-	}
+    public bool Paused {
+        get {
+            return paused;
+        }
+    }
+
+    void Awake()
+    {
+        // Instantiates the GUIManager.
+        gui = FindObjectOfType(typeof(GUIManager)) as GUIManager;
+    }
+
+    // Use this for initialization
+    void Start () {
+    
+    }
+    
+    // Update is called once per frame
+    void Update () {
+        if (Input.GetKeyDown(KeyCode.Escape) && pauseCooldown == 0)
+        {
+            PauseGame();
+
+            if (!paused)
+            {
+                //PauseGame();
+                gui.Pause();
+
+                //pauseAnimator.SetBool("Paused", true);
+            }
+            else
+            {
+                //PauseGame();
+                gui.Unpause();
+            }
+
+            pauseCooldown = 80;
+        }
+
+        if (pauseCooldown > 0)
+        {
+            pauseCooldown--;
+        }
+    }
+
+    void PauseGame()
+    {
+        paused = !paused;
+    }
+
+    public static GameManager Instance {
+        get {
+            if(instance == null)
+            {
+                instance = GameObject.FindObjectOfType<GameManager>();
+            }
+            return instance;
+        }
+    }
 }

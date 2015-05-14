@@ -210,7 +210,6 @@ public class GUIManager : MonoBehaviour  //Fuck you tom
 
     public void Pause()
     {
-
         pauseGame = true;
     }
 
