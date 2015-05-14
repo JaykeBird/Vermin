@@ -199,7 +199,15 @@ public class EnemyAI : MonoBehaviour
                 if (gui.coinsCollected > 0 && attackTrigger.hitObject.transform.position.y <= transform.position.y+transform.localScale.y/2f)
                 {
                     gui.coinsCollected -= CharacterClassData.getCoinLossAmount(playerClass);
-                    coins += CharacterClassData.getCoinLossAmount(playerClass);
+                    if (gui.coinsCollected < 0)
+                    {
+                        gui.coinsCollected = 0;
+                        coins++;
+                    }
+                    else
+                    {
+                        coins += CharacterClassData.getCoinLossAmount(playerClass);
+                    }
                     Debug.Log(coins.ToString());
                 }
 
