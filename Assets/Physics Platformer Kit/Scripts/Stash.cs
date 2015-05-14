@@ -30,7 +30,7 @@ public class Stash : MonoBehaviour //fuck you again tom
         }
         if (other.tag == "Enemy")
         {
-            coinWithdraw(other);
+            //coinWithdraw(other);
         }
     }
 
@@ -60,7 +60,7 @@ public class Stash : MonoBehaviour //fuck you again tom
 
     }
 
-    public void coinWithdraw(Collider other)
+    public bool coinWithdraw()
     {
         /*if (gui)
         {
@@ -70,9 +70,11 @@ public class Stash : MonoBehaviour //fuck you again tom
             }
         }*/
         if (stashNum > 0) {
-            other.GetComponent<EnemyAI> ().coins++;
+//            other.GetComponent<EnemyAI> ().coins++;
             stashNum--;
+			return true;
         }
+		return false;
     }
     public int getStashNum()
     {

@@ -109,12 +109,21 @@ public class EnemyAI : MonoBehaviour
                 //this.rigidbody.constraints = RigidbodyConstraints.None;
                 isSleeping = false;
             }
+            if(transform.position.y < -1)
+            {
+                transform.Translate(Vector3.up* 2);
+                Debug.Log ("We moved on up!");
+            }
+            if(transform.position.y > 0.5)
+            {
+                transform.Translate (Vector3.down * 2);
+            }
 
             if (trapTrigger && trapTrigger.colliding)
             {
                 if (trapTrigger.hitObject.tag == "Glue")
                 {
-                    Debug.Log("Sticky");
+                    //Debug.Log("Sticky");
                     speedLimit = 2f;
                     acceleration = 4f;
                 }
@@ -132,6 +141,7 @@ public class EnemyAI : MonoBehaviour
                     Vector3 a = trapTrigger.hitObject.transform.position;
                     Vector3 b = transform.position;
                     Vector3 c = a - b;
+                    c.y = 0;
                     c.Normalize();
                     this.rigidbody.AddForce(c * 20, ForceMode.VelocityChange);
 
@@ -145,8 +155,9 @@ public class EnemyAI : MonoBehaviour
 
             if (stashTrigger && stashTrigger.colliding)
             {
-                //coins++;
-                //theStash.GetComponent<Stash>().coinWithdraw();
+                
+                if(theStash.GetComponent<Stash>().coinWithdraw())
+                    coins++;
             }
 
             //chase
@@ -188,7 +199,15 @@ public class EnemyAI : MonoBehaviour
                 if (gui.coinsCollected > 0 && attackTrigger.hitObject.transform.position.y <= transform.position.y+transform.localScale.y/2f)
                 {
                     gui.coinsCollected -= CharacterClassData.getCoinLossAmount(playerClass);
-                    coins += CharacterClassData.getCoinLossAmount(playerClass);
+                    if (gui.coinsCollected < 0)
+                    {
+                        gui.coinsCollected = 0;
+                        coins++;
+                    }
+                    else
+                    {
+                        coins += CharacterClassData.getCoinLossAmount(playerClass);
+                    }
                     Debug.Log(coins.ToString());
                 }
 
@@ -214,8 +233,8 @@ public class EnemyAI : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (GameManager.Instance.Paused)
-            return;
+        //if (GameManager.Instance.Paused)
+            //return;
         if (true)
         {
             characterMotor.ManageSpeed(deceleration, speedLimit, ignoreY);
