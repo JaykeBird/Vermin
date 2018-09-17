@@ -24,11 +24,11 @@ public class DestroyObject : MonoBehaviour
 		//add force to children (and a bit of spin)
 		foreach (Transform child in children)
 		{
-			if(child.rigidbody && pushChildAmount != 0)
+			if(child.GetComponent<Rigidbody>() && pushChildAmount != 0)
 			{
 				Vector3 pushDir = child.position - transform.position;
-				child.rigidbody.AddForce(pushDir * pushChildAmount, ForceMode.Force);
-				child.rigidbody.AddTorque(Random.insideUnitSphere, ForceMode.Force);
+				child.GetComponent<Rigidbody>().AddForce(pushDir * pushChildAmount, ForceMode.Force);
+				child.GetComponent<Rigidbody>().AddTorque(Random.insideUnitSphere, ForceMode.Force);
 			}
 		}
 		

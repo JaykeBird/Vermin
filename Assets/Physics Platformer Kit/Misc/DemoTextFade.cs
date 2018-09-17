@@ -7,21 +7,21 @@ public class DemoTextFade : MonoBehaviour
 	void Awake()
 	{
 		foreach(Transform child in transform)
-				child.GetComponent<TextMesh>().renderer.enabled = false;
+				child.GetComponent<TextMesh>().GetComponent<Renderer>().enabled = false;
 	}
 	
 	void OnTriggerEnter(Collider other)
 	{
 		if(other.transform.tag == "Player")
 			foreach(Transform child in transform)
-				child.GetComponent<TextMesh>().renderer.enabled = true;
+				child.GetComponent<TextMesh>().GetComponent<Renderer>().enabled = true;
 	}
 	
 	void OnTriggerExit(Collider other)
 	{
 		if(other.transform.tag == "Player")
 			foreach(Transform child in transform)
-				child.GetComponent<TextMesh>().renderer.enabled = false;
+				child.GetComponent<TextMesh>().GetComponent<Renderer>().enabled = false;
 	}
 }
 

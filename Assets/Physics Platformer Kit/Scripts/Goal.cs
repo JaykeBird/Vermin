@@ -12,15 +12,15 @@ public class Goal : MonoBehaviour
 	
 	void Awake()
 	{
-		collider.isTrigger = true;
+		GetComponent<Collider>().isTrigger = true;
 	}
 	
 	//when player is inside trigger for enough time, load next level
 	//also lift player upwards, to give the goal a magical sense
 	void OnTriggerStay(Collider other)
 	{
-		if(other.rigidbody)
-			other.rigidbody.AddForce(Vector3.up * lift, ForceMode.Force);
+		if(other.GetComponent<Rigidbody>())
+			other.GetComponent<Rigidbody>().AddForce(Vector3.up * lift, ForceMode.Force);
 		
 		if (other.tag == "Player")
 		{

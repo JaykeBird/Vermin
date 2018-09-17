@@ -24,19 +24,19 @@ public class Coin : MonoBehaviour
 			tag = "Coin";
 			Debug.LogWarning ("'Coin' script attached to object not tagged 'Coin', tag added automatically", transform);
 		}
-		collider.isTrigger = true;
+		GetComponent<Collider>().isTrigger = true;
 		triggerParent = GetComponentInChildren<TriggerParent>();
 		//if no trigger bounds are attached to coin, set them up
 		if(!triggerParent)
 		{
 			GameObject bounds = new GameObject();
 			bounds.name = "Bounds";
-			bounds.AddComponent("SphereCollider");
+			bounds.AddComponent<SphereCollider>();
 			bounds.GetComponent<SphereCollider>().radius = 2f;
 			bounds.GetComponent<SphereCollider>().isTrigger = true;
 			bounds.transform.parent = transform;
 			bounds.transform.position = transform.position;
-			bounds.AddComponent("TriggerParent");
+			bounds.AddComponent<TriggerParent>();
 			triggerParent = GetComponentInChildren<TriggerParent>();
 			triggerParent.tagsToCheck = new string[1];
 			triggerParent.tagsToCheck[0] = "Player";

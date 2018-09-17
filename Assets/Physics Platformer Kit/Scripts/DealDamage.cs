@@ -13,11 +13,11 @@ public class DealDamage : MonoBehaviour
 		Vector3 pushDir = (victim.transform.position - transform.position);
 		pushDir.y = 0f;
 		pushDir.y = pushHeight * 0.1f;
-		if (victim.rigidbody && !victim.rigidbody.isKinematic)
+		if (victim.GetComponent<Rigidbody>() && !victim.GetComponent<Rigidbody>().isKinematic)
 		{
-			victim.rigidbody.velocity = new Vector3(0, 0, 0);
-			victim.rigidbody.AddForce (pushDir.normalized * pushForce, ForceMode.VelocityChange);
-			victim.rigidbody.AddForce (Vector3.up * pushHeight, ForceMode.VelocityChange);
+			victim.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+			victim.GetComponent<Rigidbody>().AddForce (pushDir.normalized * pushForce, ForceMode.VelocityChange);
+			victim.GetComponent<Rigidbody>().AddForce (Vector3.up * pushHeight, ForceMode.VelocityChange);
 		}
 		//deal dmg
 		if(health && !health.flashing)

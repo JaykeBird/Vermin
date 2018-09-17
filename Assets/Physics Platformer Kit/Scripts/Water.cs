@@ -22,24 +22,24 @@ public class Water : MonoBehaviour
 			tag = "Water";
 			Debug.LogWarning("'Water' script attached to an object not tagged 'Water', it been assigned the tag 'Water'", transform);
 		}
-		collider.isTrigger = true;
+		GetComponent<Collider>().isTrigger = true;
 	}
 	
 	//apply buoyancy
 	void OnTriggerStay(Collider other)
 	{
 		//get surface position
-		float surface = transform.position.y + collider.bounds.extents.y;
-		if(other.rigidbody)
+		float surface = transform.position.y + GetComponent<Collider>().bounds.extents.y;
+		if(other.GetComponent<Rigidbody>())
 		{
 			//get object depth
 			float depth = surface - other.transform.position.y;
 			//if below surface, push object
 			if(depth > 0.4f)
-				other.rigidbody.AddForce(force, ForceMode.Force);
+				other.GetComponent<Rigidbody>().AddForce(force, ForceMode.Force);
 			//if we are near the surface, add less force, this prevents objects from "jittering" up and down on the surface
 			else
-				other.rigidbody.AddForce (force * (depth * 2), ForceMode.Force);
+				other.GetComponent<Rigidbody>().AddForce (force * (depth * 2), ForceMode.Force);
 		}
 	}
 	
@@ -47,14 +47,14 @@ public class Water : MonoBehaviour
 	void OnTriggerEnter(Collider other)
 	{
 		//rigidbody entered water?
-		if(other.rigidbody)
+		if(other.GetComponent<Rigidbody>())
 		{
 			if(splashSound)
 			{
-				float volume = other.rigidbody.velocity.magnitude/5;
+				float volume = other.GetComponent<Rigidbody>().velocity.magnitude/5;
 				AudioSource.PlayClipAtPoint(splashSound, other.transform.position, volume);
 			}
-			Rigidbody r = other.rigidbody;
+			Rigidbody r = other.GetComponent<Rigidbody>();
 			//stop if we arent effecting player
 			if (r.tag == "Player" && !effectPlayerDrag)
 				return;
@@ -75,9 +75,9 @@ public class Water : MonoBehaviour
 	void OnTriggerExit(Collider other)
 	{
 		//rigidbody entered water?
-		if(other.rigidbody)
+		if(other.GetComponent<Rigidbody>())
 		{
-			Rigidbody r = other.rigidbody;
+			Rigidbody r = other.GetComponent<Rigidbody>();
 			//stop if we arent effecting player
 			if(r.tag == "Player" && !effectPlayerDrag)
 				return;

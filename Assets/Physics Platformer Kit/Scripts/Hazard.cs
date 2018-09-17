@@ -19,7 +19,7 @@ public class Hazard : MonoBehaviour
 	//setup
 	void Awake()
 	{
-		audio.playOnAwake = false;
+		GetComponent<AudioSource>().playOnAwake = false;
 		dealDamage = GetComponent<DealDamage>();
 	}
 	
@@ -34,8 +34,8 @@ public class Hazard : MonoBehaviour
 				dealDamage.Attack (col.gameObject, damage, pushHeight, pushForce);
 				if (hitSound)
 				{
-					audio.clip = hitSound;
-					audio.Play();
+					GetComponent<AudioSource>().clip = hitSound;
+					GetComponent<AudioSource>().Play();
 				}
 			}
 	}

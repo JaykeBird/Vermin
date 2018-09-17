@@ -134,7 +134,7 @@ public class EnemyAI : MonoBehaviour
                     Vector3 i = e - f;
                     i.Normalize();
                     i.y = 0;
-                    this.rigidbody.AddForce(i * 20, ForceMode.VelocityChange);
+                    this.GetComponent<Rigidbody>().AddForce(i * 20, ForceMode.VelocityChange);
                 }
                 if (trapTrigger.hitObject.tag == "Vacuum")
                 {
@@ -143,7 +143,7 @@ public class EnemyAI : MonoBehaviour
                     Vector3 c = a - b;
                     c.y = 0;
                     c.Normalize();
-                    this.rigidbody.AddForce(c * 20, ForceMode.VelocityChange);
+                    this.GetComponent<Rigidbody>().AddForce(c * 20, ForceMode.VelocityChange);
 
                 }
             }

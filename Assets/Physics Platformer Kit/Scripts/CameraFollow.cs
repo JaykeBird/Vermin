@@ -26,7 +26,7 @@ public class CameraFollow : MonoBehaviour
 		followTarget = new GameObject().transform;	//create empty gameObject as camera target, this will follow and rotate around the player
 		followTarget.name = "Camera Target";
 		if(waterFilter)
-			waterFilter.renderer.enabled = false;
+			waterFilter.GetComponent<Renderer>().enabled = false;
 		if(!target)
 			Debug.LogError("'CameraFollow script' has no target assigned to it", transform);
 		
@@ -56,14 +56,14 @@ public class CameraFollow : MonoBehaviour
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "Water" && waterFilter)
-			waterFilter.renderer.enabled = true;
+			waterFilter.GetComponent<Renderer>().enabled = true;
 	}
 	
 	//toggle waterfilter, is camera clipping walls?
 	void OnTriggerExit(Collider other)
 	{
 		if (other.tag == "Water" && waterFilter)
-			waterFilter.renderer.enabled = false;
+			waterFilter.GetComponent<Renderer>().enabled = false;
 	}
 	
 	//rotate smoothly toward the target

@@ -20,10 +20,10 @@ public class Checkpoint : MonoBehaviour
 			tag = "Respawn";
 			Debug.LogWarning ("'Checkpoint' script attached to object without the 'Respawn' tag, tag has been assigned automatically", transform);	
 		}
-		collider.isTrigger = true;
+		GetComponent<Collider>().isTrigger = true;
 		
-		if(renderer)
-			defColor = renderer.material.color;
+		if(GetComponent<Renderer>())
+			defColor = GetComponent<Renderer>().material.color;
 		activeColor.a = activeColorOpacity;
 	}
 	
@@ -45,12 +45,12 @@ public class Checkpoint : MonoBehaviour
 			health.respawnPos = transform.position;
 			
 			//toggle checkpoints
-			if(renderer.material.color != activeColor)
+			if(GetComponent<Renderer>().material.color != activeColor)
 			{
 				foreach (GameObject checkpoint in checkpoints)
-					checkpoint.renderer.material.color = defColor;
-				audio.Play();
-				renderer.material.color = activeColor;
+					checkpoint.GetComponent<Renderer>().material.color = defColor;
+				GetComponent<AudioSource>().Play();
+				GetComponent<Renderer>().material.color = activeColor;
 			}
 		}
 	}

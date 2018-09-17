@@ -44,7 +44,7 @@ public class Throwing : MonoBehaviour
 		{
 			grabBox = new GameObject();
 			grabBox.AddComponent<BoxCollider>();
-			grabBox.collider.isTrigger = true;
+			grabBox.GetComponent<Collider>().isTrigger = true;
 			grabBox.transform.parent = transform;
 			grabBox.transform.localPosition = new Vector3(0f, 0f, 0.5f);
 			grabBox.layer = 2;	//ignore raycast by default
@@ -115,8 +115,8 @@ public class Throwing : MonoBehaviour
 	private void GrabPushable(Collider other)
 	{
 		heldObj = other.gameObject;
-		objectDefInterpolation = heldObj.rigidbody.interpolation;
-		heldObj.rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+		objectDefInterpolation = heldObj.GetComponent<Rigidbody>().interpolation;
+		heldObj.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
 		AddJoint ();
 		//set limits for when player will let go of object
 		joint.breakForce = holdingBreakForce;
@@ -130,20 +130,20 @@ public class Throwing : MonoBehaviour
 		//get where to move item once its picked up
 		Mesh otherMesh = other.GetComponent<MeshFilter>().mesh;
 		holdPos = transform.position;
-		holdPos.y += (collider.bounds.extents.y) + (otherMesh.bounds.extents.y) + gap;
+		holdPos.y += (GetComponent<Collider>().bounds.extents.y) + (otherMesh.bounds.extents.y) + gap;
 		
 		//if there is space above our head, pick up item (layermask index 2: "Ignore Raycast", anything on this layer will be ignored)
 		if(!Physics.CheckSphere(holdPos, checkRadius, 2))
 		{
 			gizmoColor = Color.green;
 			heldObj = other.gameObject;
-			objectDefInterpolation = heldObj.rigidbody.interpolation;
-			heldObj.rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+			objectDefInterpolation = heldObj.GetComponent<Rigidbody>().interpolation;
+			heldObj.GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
 			heldObj.transform.position = holdPos;
 			heldObj.transform.rotation = transform.rotation;
 			AddJoint();
 			//here we adjust the mass of the object, so it can seem heavy, but not effect player movement whilst were holding it
-			heldObj.rigidbody.mass *= weightChange;
+			heldObj.GetComponent<Rigidbody>().mass *= weightChange;
 			//make sure we don't immediately throw object after picking it up
 			timeOfPickup = Time.time;
 		}
@@ -157,7 +157,7 @@ public class Throwing : MonoBehaviour
 	
 	private void DropPushable()
 	{
-		heldObj.rigidbody.interpolation = objectDefInterpolation;
+		heldObj.GetComponent<Rigidbody>().interpolation = objectDefInterpolation;
 		Destroy (joint);
 		playerMove.rotateSpeed = defRotateSpeed;
 		heldObj = null;
@@ -168,14 +168,14 @@ public class Throwing : MonoBehaviour
 	{
 		if(throwSound)
 		{
-			audio.volume = 1;
-			audio.clip = throwSound;
-			audio.Play ();
+			GetComponent<AudioSource>().volume = 1;
+			GetComponent<AudioSource>().clip = throwSound;
+			GetComponent<AudioSource>().Play ();
 		}
 		Destroy (joint);
-		heldObj.rigidbody.interpolation = objectDefInterpolation;
-		heldObj.rigidbody.mass /= weightChange;
-		heldObj.rigidbody.AddRelativeForce (throwForce, ForceMode.VelocityChange);
+		heldObj.GetComponent<Rigidbody>().interpolation = objectDefInterpolation;
+		heldObj.GetComponent<Rigidbody>().mass /= weightChange;
+		heldObj.GetComponent<Rigidbody>().AddRelativeForce (throwForce, ForceMode.VelocityChange);
 		heldObj = null;
 		timeOfThrow = Time.time;
 	}
@@ -187,12 +187,12 @@ public class Throwing : MonoBehaviour
 		{
 			if(pickUpSound)
 			{
-				audio.volume = 1;
-				audio.clip = pickUpSound;
-				audio.Play ();
+				GetComponent<AudioSource>().volume = 1;
+				GetComponent<AudioSource>().clip = pickUpSound;
+				GetComponent<AudioSource>().Play ();
 			}
 			joint = heldObj.AddComponent<FixedJoint>();
-			joint.connectedBody = rigidbody;
+			joint.connectedBody = GetComponent<Rigidbody>();
 		}
 	}
 	

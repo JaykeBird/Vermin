@@ -14,13 +14,13 @@ public class CharacterMotor : MonoBehaviour
 	void Awake()
 	{
 		//set up rigidbody constraints
-		rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+		GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;
 		if(sidescroller)
-			rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 		else
-			rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 		//add frictionless physics material
-		if(collider.material.name == "Default (Instance)")
+		if(GetComponent<Collider>().material.name == "Default (Instance)")
 		{
 			PhysicMaterial pMat = new PhysicMaterial();
 			pMat.name = "Frictionless";
@@ -28,7 +28,7 @@ public class CharacterMotor : MonoBehaviour
 			pMat.bounceCombine = PhysicMaterialCombine.Multiply;
 			pMat.dynamicFriction = 0f;
 			pMat.staticFriction = 0f;
-			collider.material = pMat;
+			GetComponent<Collider>().material = pMat;
 			Debug.LogWarning("No physics material found for CharacterMotor, a frictionless one has been created and assigned", transform);
 		}
 	}
@@ -44,7 +44,7 @@ public class CharacterMotor : MonoBehaviour
 		if (DistanceToTarget <= stopDistance)
 			return true;
 		else 
-			rigidbody.AddForce(relativePos.normalized * acceleration * Time.deltaTime, ForceMode.VelocityChange);
+			GetComponent<Rigidbody>().AddForce(relativePos.normalized * acceleration * Time.deltaTime, ForceMode.VelocityChange);
 			return false;
 	}
 	
@@ -53,15 +53,15 @@ public class CharacterMotor : MonoBehaviour
 	{	
 		Vector3 dir;
 		if(ignoreY)
-			dir = new Vector3(rigidbody.velocity.x, 0f, rigidbody.velocity.z);
+			dir = new Vector3(GetComponent<Rigidbody>().velocity.x, 0f, GetComponent<Rigidbody>().velocity.z);
 		else
-			dir = rigidbody.velocity;
+			dir = GetComponent<Rigidbody>().velocity;
 		
 		if (dir.magnitude > 0.1)
 		{
 			Quaternion dirQ = Quaternion.LookRotation (dir);
 			Quaternion slerp = Quaternion.Slerp (transform.rotation, dirQ, dir.magnitude * turnSpeed * Time.deltaTime);
-			rigidbody.MoveRotation(slerp);
+			GetComponent<Rigidbody>().MoveRotation(slerp);
 		}
 	}
 	
@@ -78,14 +78,14 @@ public class CharacterMotor : MonoBehaviour
 		Vector3 newDir = lookDir - characterPos;
 		Quaternion dirQ = Quaternion.LookRotation (newDir);
 		Quaternion slerp = Quaternion.Slerp (transform.rotation, dirQ, turnSpeed * Time.deltaTime);
-		rigidbody.MoveRotation (slerp);
+		GetComponent<Rigidbody>().MoveRotation (slerp);
 	}
 	
 	// apply friction to rigidbody, and make sure it doesn't exceed its max speed
 	public void ManageSpeed(float deceleration, float maxSpeed, bool ignoreY)
 	{	
 		//Debug.Log ("currentSpeed: " + currentSpeed.magnitude);
-		currentSpeed = rigidbody.velocity;
+		currentSpeed = GetComponent<Rigidbody>().velocity;
 		//Debug.Log ("currentSpeed: " + currentSpeed.magnitude);
 		if (ignoreY)
 			currentSpeed.y = 0;
@@ -93,7 +93,7 @@ public class CharacterMotor : MonoBehaviour
 		if (currentSpeed.magnitude > 0)
 		{
 
-			rigidbody.AddForce ((currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
+			GetComponent<Rigidbody>().AddForce ((currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
 			//if (rigidbody.velocity.magnitude > maxSpeed)
 				//rigidbody.AddForce ((currentSpeed * -1) * deceleration * Time.deltaTime, ForceMode.VelocityChange);
 		}

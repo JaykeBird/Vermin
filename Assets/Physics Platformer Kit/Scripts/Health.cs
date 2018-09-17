@@ -35,10 +35,10 @@ public class Health : MonoBehaviour
 	{
 		if(currentHealth == 0)
 			Debug.LogWarning(transform.name + " has 'currentHealth' set to 0 or less in 'Health' script: it has died upon scene start");
-		audio.playOnAwake = false;
+		GetComponent<AudioSource>().playOnAwake = false;
 		if(flashObject == null)
 			flashObject = transform;
-		originalColor = flashObject.renderer.material.color;
+		originalColor = flashObject.GetComponent<Renderer>().material.color;
 		defHealth = currentHealth;
 		respawnPos = transform.position;
 	}
@@ -62,7 +62,7 @@ public class Health : MonoBehaviour
 			Flash ();
 			if (Time.time > stopFlashTime)
 			{
-				flashObject.renderer.material.color = originalColor;
+				flashObject.GetComponent<Renderer>().material.color = originalColor;
 				flashing = false;
 			}
 		}
@@ -76,7 +76,7 @@ public class Health : MonoBehaviour
 	//toggle the flashObject material tint color
 	void Flash()
 	{
-		flashObject.renderer.material.color = (hitColor) ? hitFlashColor : originalColor;
+		flashObject.GetComponent<Renderer>().material.color = (hitColor) ? hitFlashColor : originalColor;
 		if(Time.time > nextFlash)
 		{
 			hitColor = !hitColor;
@@ -96,11 +96,11 @@ public class Health : MonoBehaviour
 		if (deadSound)
 			AudioSource.PlayClipAtPoint(deadSound, transform.position);
 		flashing = false;
-		flashObject.renderer.material.color = originalColor;
+		flashObject.GetComponent<Renderer>().material.color = originalColor;
 		if(respawn)
 		{
-			if(rigidbody)
-				rigidbody.velocity *= 0;
+			if(GetComponent<Rigidbody>())
+				GetComponent<Rigidbody>().velocity *= 0;
 			transform.position = respawnPos;
 			dead = false;
 			currentHealth = defHealth;
@@ -116,11 +116,11 @@ public class Health : MonoBehaviour
 	//calculate impact damage on collision
 	void OnCollisionEnter(Collision col)
 	{
-		if(!audio.isPlaying && impactSound)
+		if(!GetComponent<AudioSource>().isPlaying && impactSound)
 		{
-			audio.clip = impactSound;
-			audio.volume = col.relativeVelocity.magnitude/30;
-			audio.Play();
+			GetComponent<AudioSource>().clip = impactSound;
+			GetComponent<AudioSource>().volume = col.relativeVelocity.magnitude/30;
+			GetComponent<AudioSource>().Play();
 		}
 			
 		//make sure we take impact damage from this object

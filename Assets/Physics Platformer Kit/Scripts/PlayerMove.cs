@@ -159,7 +159,7 @@ public class PlayerMove : MonoBehaviour
             {
                 animator.SetFloat("DistanceToTarget", characterMotor.DistanceToTarget);
                 animator.SetBool("Grounded", grounded);
-                animator.SetFloat("YVelocity", rigidbody.velocity.y);
+                animator.SetFloat("YVelocity", GetComponent<Rigidbody>().velocity.y);
             }
 
             if (useItemCooldown > 0)
@@ -223,7 +223,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            this.rigidbody.velocity = Vector3.zero;
+            this.GetComponent<Rigidbody>().velocity = Vector3.zero;
             //float i = Input.GetAxisRaw("Horizontal");
 
             //if (i == 1)
@@ -264,11 +264,11 @@ public class PlayerMove : MonoBehaviour
         if (other.collider.tag != "Untagged" || grounded == false)
             return;
         //if no movement should be happening, stop player moving in Z/X axis
-        if(direction.magnitude == 0 && slope < slopeLimit && rigidbody.velocity.magnitude < 2)
+        if(direction.magnitude == 0 && slope < slopeLimit && GetComponent<Rigidbody>().velocity.magnitude < 2)
         {
             //it's usually not a good idea to alter a rigidbodies velocity every frame
             //but this is the cleanest way i could think of, and we have a lot of checks beforehand, so it shou
-            rigidbody.velocity = Vector3.zero;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
     
@@ -277,14 +277,14 @@ public class PlayerMove : MonoBehaviour
     private bool IsGrounded() 
     {
         //get distance to ground, from centre of collider (where floorcheckers should be)
-        float dist = collider.bounds.extents.y;
+        float dist = GetComponent<Collider>().bounds.extents.y;
         //check whats at players feet, at each floorcheckers position
         foreach (Transform check in floorCheckers)
         {
             RaycastHit hit;
             if(Physics.Raycast(check.position, Vector3.down, out hit, dist + 0.05f))
             {
-                if(!hit.transform.collider.isTrigger)
+                if(!hit.transform.GetComponent<Collider>().isTrigger)
                 {
                     //slope control
                     slope = Vector3.Angle (hit.normal, Vector3.up);
@@ -292,10 +292,10 @@ public class PlayerMove : MonoBehaviour
                     if(slope > slopeLimit && hit.transform.tag != "Pushable")
                     {
                         Vector3 slide = new Vector3(0f, -slideAmount, 0f);
-                        rigidbody.AddForce (slide, ForceMode.Force);
+                        GetComponent<Rigidbody>().AddForce (slide, ForceMode.Force);
                     }
                     //enemy bouncing
-                    if (hit.transform.tag == "Enemy" && rigidbody.velocity.y < 0)
+                    if (hit.transform.tag == "Enemy" && GetComponent<Rigidbody>().velocity.y < 0)
                     {
                         enemyAI = hit.transform.GetComponent<EnemyAI>();
                         if(enemyAI.coins>0)
@@ -313,10 +313,10 @@ public class PlayerMove : MonoBehaviour
                     //moving platforms
                     if (hit.transform.tag == "MovingPlatform" || hit.transform.tag == "Pushable")
                     {
-                        movingObjSpeed = hit.transform.rigidbody.velocity;
+                        movingObjSpeed = hit.transform.GetComponent<Rigidbody>().velocity;
                         movingObjSpeed.y = 0f;
                         //9.5f is a magic number, if youre not moving properly on platforms, experiment with this number
-                        rigidbody.AddForce(movingObjSpeed * movingPlatformFriction * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                        GetComponent<Rigidbody>().AddForce(movingObjSpeed * movingPlatformFriction * Time.fixedDeltaTime, ForceMode.VelocityChange);
                     }
                     else
                     {
@@ -339,11 +339,11 @@ public class PlayerMove : MonoBehaviour
         groundedCount = (grounded) ? groundedCount += Time.deltaTime : 0f;
         
         //play landing sound
-        if(groundedCount < 0.25 && groundedCount != 0 && !audio.isPlaying && landSound && rigidbody.velocity.y < 1)
+        if(groundedCount < 0.25 && groundedCount != 0 && !GetComponent<AudioSource>().isPlaying && landSound && GetComponent<Rigidbody>().velocity.y < 1)
         {
-            audio.volume = Mathf.Abs(rigidbody.velocity.y)/40;
-            audio.clip = landSound;
-            audio.Play ();
+            GetComponent<AudioSource>().volume = Mathf.Abs(GetComponent<Rigidbody>().velocity.y)/40;
+            GetComponent<AudioSource>().clip = landSound;
+            GetComponent<AudioSource>().Play ();
         }
         //if we press jump in the air, save the time
         if (Input.GetButtonDown ("Jump") && !grounded)
@@ -373,12 +373,12 @@ public class PlayerMove : MonoBehaviour
     {
         if(jumpSound)
         {
-            audio.volume = 1;
-            audio.clip = jumpSound;
-            audio.Play ();
+            GetComponent<AudioSource>().volume = 1;
+            GetComponent<AudioSource>().clip = jumpSound;
+            GetComponent<AudioSource>().Play ();
         }
-        rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0f, rigidbody.velocity.z);
-        rigidbody.AddRelativeForce (jumpVelocity, ForceMode.Impulse);
+        GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, 0f, GetComponent<Rigidbody>().velocity.z);
+        GetComponent<Rigidbody>().AddRelativeForce (jumpVelocity, ForceMode.Impulse);
         airPressTime = 0f;
     }
 
@@ -442,7 +442,7 @@ public class PlayerMove : MonoBehaviour
 
     public void Reset()
     {
-        this.rigidbody.position = startLoc;
+        this.GetComponent<Rigidbody>().position = startLoc;
         gui.Unpause();
 
     }

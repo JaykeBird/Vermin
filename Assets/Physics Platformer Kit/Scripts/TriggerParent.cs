@@ -15,7 +15,7 @@ public class TriggerParent : MonoBehaviour
 	
 	void Awake()
 	{
-		if (!collider || (collider && !collider.isTrigger)) {
+		if (!GetComponent<Collider>() || (GetComponent<Collider>() && !GetComponent<Collider>().isTrigger)) {
 			Debug.LogError ("'TriggerParent' script attached to object which does not have a trigger collider", transform);
 
 		}

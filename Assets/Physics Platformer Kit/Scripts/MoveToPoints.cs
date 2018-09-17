@@ -25,11 +25,11 @@ public class MoveToPoints : MonoBehaviour
 		if(transform.tag != "Enemy")
 		{
 			//add kinematic rigidbody
-			if(!rigidbody)
-				gameObject.AddComponent("Rigidbody");
-			rigidbody.isKinematic = true;
-			rigidbody.useGravity = false;
-			rigidbody.interpolation = RigidbodyInterpolation.Interpolate;	
+			if(!GetComponent<Rigidbody>())
+				gameObject.AddComponent<Rigidbody>();
+			GetComponent<Rigidbody>().isKinematic = true;
+			GetComponent<Rigidbody>().useGravity = false;
+			GetComponent<Rigidbody>().interpolation = RigidbodyInterpolation.Interpolate;	
 		}
 		else
 		{
@@ -102,7 +102,7 @@ public class MoveToPoints : MonoBehaviour
 			if(!arrived && waypoints.Count > 0)
 			{
 				Vector3 direction = waypoints[currentWp].position - transform.position;
-				rigidbody.MovePosition(transform.position + (direction.normalized * speed * Time.fixedDeltaTime));
+				GetComponent<Rigidbody>().MovePosition(transform.position + (direction.normalized * speed * Time.fixedDeltaTime));
 			}
 		}
 	}
