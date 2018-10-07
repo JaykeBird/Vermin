@@ -43,4 +43,4 @@ UnityVS.Vermin.CSharp.csproj
 Vermin_Data/
 Vermin_0_2_0_Data/
 *.orig
-/.vs/Vermin/v15/Server/sqlite3
+/.vs/Vermin/v15/
