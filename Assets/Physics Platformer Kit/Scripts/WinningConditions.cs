@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class WinningConditions : MonoBehaviour {
 	public int maxStashValue;
@@ -22,7 +23,8 @@ public class WinningConditions : MonoBehaviour {
 			}
 		}
 		if (win) {
-			Application.LoadLevel(nextScene);
+            SceneManager.LoadScene(nextScene);
+			//Application.LoadLevel(nextScene);
 		}
 	}
 }

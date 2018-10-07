@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.Physics_Platformer_Kit.Scripts;
+using UnityEngine.SceneManagement;
 
 public class PlayScript : MonoBehaviour {
 
@@ -57,7 +58,7 @@ public class PlayScript : MonoBehaviour {
         }
 
         charSelect.SetBool("IsShown", false);
-        Application.LoadLevel("OfficeSpaceFloor1");
+        SceneManager.LoadScene("OfficeSpaceFloor1");
     }
 
     public void GoBackHome()
