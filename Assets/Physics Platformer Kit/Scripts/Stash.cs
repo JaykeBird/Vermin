@@ -14,9 +14,9 @@ public class Stash : MonoBehaviour //fuck you again tom
     void Start ()
     {
         gui = FindObjectOfType(typeof(GUIManager)) as GUIManager;
-        Debug.Log("gui found: " + gui.name);
+        //Debug.Log("gui found: " + gui.name);
         gui.addStash (this);
-        Debug.Log("Added myself to gui");
+        //Debug.Log("Added myself to gui");
     }
     
     // Update is called once per frame

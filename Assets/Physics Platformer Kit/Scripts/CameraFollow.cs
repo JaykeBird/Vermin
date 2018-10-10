@@ -143,8 +143,13 @@ public class CameraFollow : MonoBehaviour
 					Debug.Log ("Camera: (" + b.x + "," + b.y + "," + b.z + ")");
 					Debug.Log ("It was closer than the player");*/
 					MeshRenderer h =  hitinfo.transform.GetComponentInParent<MeshRenderer>();
-					h.enabled = false;
-					hits.Add (h);
+                    if (h != null)
+                    {
+                        //var col = h.material.color;
+                        //h.material.color = new Color(col.r, col.g, col.b, 0.6f);
+                        h.enabled = false;
+                        hits.Add(h);
+                    }
 				}
 
 
@@ -164,8 +169,10 @@ public class CameraFollow : MonoBehaviour
 				hitinfo = new RaycastHit();
 				for(int i = 0 ; i<hits.Count;i++)
 				{
-					hits[i].enabled = true;
-					hits.RemoveAt (i);
+                    //var col = hits[i].material.color;
+                    //hits[i].material.color = new Color(col.r, col.g, col.b, 1.0f);
+                    hits[i].enabled = true;
+                    hits.RemoveAt (i);
 				}
 			}
 				

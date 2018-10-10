@@ -40,7 +40,7 @@ public class Coin : MonoBehaviour
 			triggerParent = GetComponentInChildren<TriggerParent>();
 			triggerParent.tagsToCheck = new string[1];
 			triggerParent.tagsToCheck[0] = "Player";
-			Debug.LogWarning ("No pickup radius 'bounds' trigger attached to coin: " + transform.name + ", one has been added automatically", bounds);
+			//Debug.LogWarning ("No pickup radius 'bounds' trigger attached to coin: " + transform.name + ", one has been added automatically", bounds);
 		}
 	}
 	
